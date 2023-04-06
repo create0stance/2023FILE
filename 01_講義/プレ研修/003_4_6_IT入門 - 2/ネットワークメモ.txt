@@ -1,0 +1,74 @@
+TCP／IPネットワークで通信を行う際、データはIP（Internet Protocol）によって分割されます。
+パケットには送信元IPアドレスや宛先IPアドレスが記述されたIPヘッダがあります。ルーターはこのIPヘッダに記述された宛先IPアドレスを読み取り、次に送るべき先を決定します。
+ルータ：
+ルーターに到達したIPパケットの最適なルートを検索
+
+イーサネット（Ethernet）とは、主にパソコンなどで信号をやり取りに用いられている規格
+
+IPどこの住所に送るのかの情報を持つ
+IPは異なる複数のネットワークを相互に接続し、データを伝送することを実現するプロトコル。
+TCPはIPネットワークにおいて信頼性の高い通信経路を作成するためのプロトコルだ。
+IPはアドレス割り当てと経路指定に使用される。 
+TCPはIPを介した接続の中で、破損したり損失させたりせずにデータを送受信するために使用される。
+
+HTTP (HyperText Transfer Protocol) は、WebサーバとクライアントのWebブラウザがデータを送受信
+　するために使用するアプリケーション層のプロトコルです。HTTPにより、Webページを記述するために
+　使用する言語（HTML）による文書、画像、音声、動画等のファイルを表現形式を含めてやりとりできます。
+IPヘッダ、TCPヘッダ、HTTPコマンド
+
+ドライバ
+OSや周辺機器とPC等のハードを橋渡しし、動作させる役割を果たします
+
+送信元ポート番号	16 bit	
+　送信元のポート番号の値。
+
+宛先ポート番号	16 bit	
+　宛先のポート番号の値。
+
+シーケンス番号	32 bit	
+　送信したデータの順序を示す値。「相手から受信した確認応答番号」の値。
+
+HTTPリクエスト
+
+2進数 「 1 」の次に位
+00 01 10 11 100 101 110 111 1000 1001 1010 1011 1100 1101 1110 
+0     1   2    3    4    5 
+
+ルーターがDNSサーバーに問い合わせIPアドレスに変換し、
+ルーターにルーティングテーブルと呼ばれる経路表があります。その経路表とルーターに到達したパケットの宛先アドレスを照合します。
+そして、最適なルートを瞬時に探し出し、次のルーターなどにパケットを渡します。
+
+HTTP/1.1 200 OK\r\n
+Server: nginx\r\n
+Date: Tue, 11 Jul 2017 09:23:07 GMT\r\n
+Content-Type: text/html\r\n
+Transfer-Encoding: chunked\r\n
+Connection: keep-alive\r\n
+\r\n
+<!DOCTYPE html>\r\n
+<html lang="ja">\r\n
+<head>\r\n
+\t<meta http-equiv="content-type" content="text/html; charset=UTF-8" />\r\n
+\t<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">\r\n
+\r\n
+\r\n
+\t<meta name="keywords" content="\350\276\236\345\205\270,IT,\347\224\250\350\252\236,\345\210\235\345\277\203\350\200\205">\r\n
+\t<meta name="author" content="Makoto Sasaki">\r\n
+\t<meta name="copyright" content="Copyright PCS">\r\n
+\r\n
+\t<meta name="application-name" content="\343\202\217\343\202\217\343\202\217IT\347\224\250\350\252\236\350\276\236\345\205\270"/>\r\n
+\t<link rel="stylesheet" href="css/style.css?ver=00109">\r\n
+\t<link rel="stylesheet" href="css/search.css?ver=00109">\r\n
+\t<script src="./js/jquery-1.7.2.min.js?ver=00109"></script>\r\n
+\t<script src="./js/common.js?ver=00109"></script>\r\n
+</head>\r\n
+<body>\r\n
+
+（中略）
+
+</body>\r\n
+</html>\r\n
+\r\n
+
+ローカルなIPアドレスと、グローバルIPアドレスを結び付ける技術であるNAT
+
