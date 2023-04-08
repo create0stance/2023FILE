@@ -1,0 +1,59 @@
+p.error {
+	color: red;
+}
+
+span.error {
+	color: red;
+}
+
+div#header {
+	height: 100px;
+	background-color: #4682B4;
+	color: #FFFFFF;
+}
+
+div#footer {
+	text-align: center;
+	height: 50px;
+	background-color: #4682B4;
+	color: #FFFFFF;
+}
+
+div#main {
+	text-align: center;
+	height: 300px;
+}
+
+div#loginInfo {
+	text-align: right;
+}
+
+div#search {
+	overflow: hidden;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+div.form {
+	width: 320px;
+	float: left;
+	margin-left: 80px;
+	margin-right: 80px;
+}
+
+input {
+	width: 100px;
+}
+
+select {
+	width: 100px;
+}
+
+p.message {
+	text-align: center;
+	color: #ff0000;
+}
+
+p.listLink {
+	text-align: center;
+}

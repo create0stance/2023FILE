@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    th:replace="~{layout :: layout(~{::title},~{::body/content()})}">
+<head>
+<title>ログイン画面</title>
+</head>
+<body>
+  <p>ログイン画面</p>
+  <div id="main">
+    <p>ユーザーIDとパスワードを入力してください。</p>
+    <p class="error" th:text="${errMessage}"></p>
+    <form method="post" action="/book_list/login" th:object="${loginForm}">
+		<span class="error" th:errors="*{bookUserId}"></span><br/>
+		<span class="error" th:errors="*{password}"></span><br/>
+		ユーザ ID:<input type="text" th:field="*{bookUserId}" />
+		<br/>
+		パスワード:<input type="password" th:field="*{password}" />
+		<br/>
+		<input type="submit" value="ログイン" />
+	</form>
+  </div>
+</body>
+</html>

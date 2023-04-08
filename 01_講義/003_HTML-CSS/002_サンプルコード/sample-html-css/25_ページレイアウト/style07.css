@@ -1,0 +1,28 @@
+@charset "utf-8";
+
+header {
+	width: 700px;
+	height: 100px;
+	background: #4dc;
+}
+.container {
+	display: flex;
+	height:300px;
+}
+aside {
+	width: 200px;
+	background: #7fffd4;
+}
+
+article {
+	width: 500px;
+	background: #fec;
+}
+
+
+footer {
+	width: 700px;
+	height: 100px;
+	background: #dcdcdc;
+}
+

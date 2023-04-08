@@ -1,0 +1,10 @@
+<meta charset="UTF-8" />
+<div id="header" th:fragment="layout-header">
+	<div class="content">
+		<h3 class="title">書籍一覧システム</h3>
+		<div id="loginInfo" th:unless="${session.userName == null}">
+			ようこそ、<span th:text="${session.userName}"></span>さん
+			<a href="/book_list/logout">ログアウト</a>
+		</div>
+	</div>
+</div>
