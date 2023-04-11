@@ -1,35 +1,3 @@
 @charset "utf-8";
 
-#header {
-	width: 700px;
-	height: 100px;
-	background: #4dc;
-}
-
-.container {
-	width:700px;
-	height:300px;
-	overflow:hidden;
-}
-
-#aside {
-	width: 200px;
-	height: 300px;
-	background: #7fffd4;
-	float: left;
-}
-
-#main {
-	width: 500px;
-	height: 300px;
-	background: #fec;
-	float: left;
-}
-
-
-#footer {
-	width: 700px;
-	height: 100px;
-	background: #dcdcdc;
-}
 
