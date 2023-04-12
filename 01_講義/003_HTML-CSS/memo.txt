@@ -1,2 +1,12 @@
-補助ツール
+資料ダウンロード
+https://drive.google.com/drive/folders/1kMsAa2V0sAfHcMpWG3qpMCVY5Q29NKSH?usp=share_link
+1,進め方の説明
+補助ツールの利用もOK
 https://liveweave.com/
+・確認試験
+・練習問題
+・進捗確認
+
+TODO
+・確認試験OK
+・練習問題、サンプルコードOK
