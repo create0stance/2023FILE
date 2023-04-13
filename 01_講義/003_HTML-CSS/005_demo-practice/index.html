@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/base.css">
+</head>
+
+<body>
+    <div class="content-wrapper">
+        <header class="header">
+            <a href="#"><img src="./img/logo-color.png" alt=""></a>
+        </header>
+        <main class="wrapper">
+            <div class="main-page main-container">
+                <form id="MyForm" class="form apply-form" action="" method="POST">
+                    <div class="white-box input-w100 spread-form">
+                        <h1>お問い合わせフォーム</h1>
+                        <div class="required-form">
+                            <label>お名前</label>
+                            <div class="control-group two-column">
+                                <input type="text" name="kanji_firstname" placeholder="姓" required="required">
+                                <input type="text" name="kanji_lastname" placeholder="名" required="required">
+                            </div>
+                            <p class="error">お名前を入力してください。</p>
+                        </div>
+                        <div class="required-form">
+                            <label>フリガナ</label>
+                            <div class="control-group two-column">
+                                <input type="text" name="furigana_firstname" placeholder="セイ" required="required" pattern="^[ァ-ンヴー]+$">
+                                <input type="text" name="furigana_lastname" placeholder="メイ" required="required" pattern="^[ァ-ンヴー]+$" >
+                                <p class="error">フリガナを全角カナで入力してください。</p>
+                            </div>
+                        </div>
+                        <div class="required-form">
+                            <label>メールアドレス</label>
+                            <div class="control-group">
+                                <input type="email" name="mailaddress" placeholder="sapporo@it-school.com"
+                                    required="required">
+                            </div>
+                            <p class="error">メールアドレスを正しく入力してください。</p>
+                        </div>
+                        <div class="required-form">
+                            <label>お問い合わせ内容</label>
+                            <div class="control-group">
+                                <textarea name="contact-body" placeholder="お問い合わせ内容" rows="10" required="required"></textarea>
+                            </div>
+                            <p class="error">お問い合わせ内容を入力してください。</p>
+                        </div>
+
+                        <div class="form-btn not-spread">
+                            <button type="submit" class="btn btn-ac btn-big btn-arrow-right btn-pink submit-btn"
+                                name="next">送信する</button>
+                            <div id="alertBox" class="alert-box">
+                                <p>正しく入力されていない項目があります。</p>
+                            </div>
+                        </div>
+                </form>
+            </div>
+        </main>
+        <footer>
+            <div class="footer__wrapper">
+                &copy;東京ITスクール 札幌会場
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
