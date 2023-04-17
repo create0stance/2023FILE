@@ -1,3 +1,4 @@
+file:///C:/Users/edu/Documents/2023FILE/01_%E8%AC%9B%E7%BE%A9/003_HTML-CSS/002_%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%82%B3%E3%83%BC%E3%83%89/sample-html-css/26_%E5%85%A5%E5%8A%9B%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0/index.html
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
@@ -5,6 +6,32 @@
 		<title>入力フォーム</title>
 	</head>
 	<body>
-	
+		<form action="" method="post">
+				<p>お名前<br />
+				<input type="text" name="onamae" value="yamashita" /></p>
+				<p>お住まいの地域<br />
+					<select name="area">
+						<option value="1">北海道・東北</option>
+						<option value="2">関東</option>
+						<option value="3" selected>中部</option>
+						<option value="4">関西</option>
+						<option value="5">中国・四国</option>
+						<option value="6">九州・沖縄</option>
+					</select>
+				</p>
+				<p>電話番号<br />
+					<input type="number" name="phone" /></p>
+				<p>eメール<br />
+					<input type="email" name="mail" /></p>
+				<p>お問い合わせ種類<br />
+					<label><input type="radio" name="type" value="1" checked="checked"/>商品について</label>
+					<label><input type="radio" name="type" value="2" />当サイトについて</label>
+				</p>
+				<p>お問い合わせ内容<br />
+<textarea name="detail" cols="30" rows="5">
+</textarea>
+				</p>
+			<p><input type="submit" value="送信" /></p>
+		</form>
 	</body>
 </html>
