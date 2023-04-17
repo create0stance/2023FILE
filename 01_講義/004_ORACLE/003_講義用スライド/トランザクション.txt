@@ -1,0 +1,75 @@
+-- systemで実行
+ALTER SESSION SET CONTAINER = XEPDB1;
+-- Bさんのアカウントを削除
+DELETE FROM sssuser.account WHERE user_ID = 'B';
+COMMIT;
+ROLLBACK;
+
+SELECT * FROM sssuser.account;
+
+UPDATE sssuser.account set barance = barance - 100000 WHERE user_ID = 'A';
+UPDATE sssuser.account set barance = barance + 100000 WHERE user_ID = 'B';
+
+
+-- sssuserで実行
+-- table削除
+DROP TABLE account;
+CREATE TABLE account (
+  -- ユーザーID
+  user_id NCHAR(1) PRIMARY KEY ,
+  -- 残高
+  barance NUMBER(10)
+);
+INSERT INTO account VALUES('A',1000000);
+INSERT INTO account VALUES('B',2000000);
+COMMIT;
+SELECT * FROM sssuser.account;
+
+-- Aさんの口座から100000円引き出し
+UPDATE account set barance = barance - 100000 WHERE user_ID = 'A';
+COMMIT;
+
+-- Bさんの口座へ100000円振込
+UPDATE account set barance = barance + 100000 WHERE user_ID = 'B';
+COMMIT;
+
+-- 問題が発生した場合
+ROLLBACK;
+
+
+
+-- プログラム例
+SET SERVEROUTPUT ON;
+DECLARE
+  -- 取引金額
+  amount   NUMBER(8) := 100000;
+  -- 初期化
+  bBarance NUMBER(8) := 0;
+  aBarance NUMBER(8) := 0;
+  senderAccountNum NUMBER(1) := 0;
+BEGIN                     
+  DBMS_OUTPUT.PUT_LINE('取引金額' || amount);
+  -- Aさんの残高
+  SELECT barance INTO aBarance FROM sssuser.account WHERE user_ID = 'A';
+  -- Bさんのアカウント数
+  SELECT COUNT(*) INTO senderAccountNum FROM sssuser.account WHERE user_ID = 'B';
+  DBMS_OUTPUT.PUT_LINE('Aさんの残高(処理開始前):'|| aBarance);
+  -- Bさんのアカウントがある場合:処理を続行
+  IF (senderAccountNum  = 1) THEN
+    DBMS_OUTPUT.PUT_LINE('Bさんの残高(処理開始前):'|| bBarance);
+    UPDATE account set barance = barance - amount WHERE user_ID = 'A';
+    UPDATE account set barance = barance + amount WHERE user_ID = 'B';
+    COMMIT;
+    DBMS_OUTPUT.PUT_LINE('コミットしました');
+  ELSE
+  -- Bさんのアカウントが無い場合は、ロールバック
+    DBMS_OUTPUT.PUT_LINE('Bさんのアカウント数:'|| senderAccountNum); 
+    ROLLBACK;
+    DBMS_OUTPUT.PUT_LINE('ロールバックしました');
+  END IF;
+--  COMMIT; 
+END;
+/
+
+SELECT * FROM sssuser.account;
+
