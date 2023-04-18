@@ -1,0 +1,15 @@
+Å°
+SELECT COUNT(*) FROM item;
+SELECT *
+   FROM Item
+ORDER BY sel_price DESC;
+
+Å°
+SELECT *
+   FROM Item
+ORDER BY sel_price DESC, item_id ASC;
+
+Å°
+SELECT item_id AS id, item_name
+   FROM Item
+ORDER BY id ASC;

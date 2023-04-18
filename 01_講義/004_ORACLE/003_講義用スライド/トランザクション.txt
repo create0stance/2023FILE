@@ -2,6 +2,7 @@
 ALTER SESSION SET CONTAINER = XEPDB1;
 -- Bさんのアカウントを削除
 DELETE FROM sssuser.account WHERE user_ID = 'B';
+
 COMMIT;
 ROLLBACK;
 

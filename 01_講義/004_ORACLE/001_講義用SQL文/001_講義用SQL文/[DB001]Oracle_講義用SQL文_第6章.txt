@@ -1,0 +1,33 @@
+/*①*/
+SELECT * FROM employee;
+
+INSERT INTO employee VALUES (5,5555,'阿戸形付',1,'東京都','2009/09/09',2);
+
+SELECT * FROM employee;
+/*ここで①の実行*/
+
+/*②*/
+COMMIT;
+
+SELECT * FROM employee;
+/*ここで②の実行*/
+
+/*③*/
+UPDATE employee SET EMP_PASS = 9999;
+
+SELECT * FROM employee;
+/*ここで③の実行*/
+
+/*④*/
+ROLLBACK;
+
+SELECT * FROM employee;
+/*ここで④の実行*/
+
+/*⑤*/
+DELETE FROM employee WHERE EMP_ID = 5;
+
+COMMIT;
+
+SELECT * FROM employee;
+/*ここで⑤の実行*/

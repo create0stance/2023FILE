@@ -1,0 +1,79 @@
+■
+-- テーブルの作成
+CREATE TABLE item2
+(item_id	CHAR(4)	NOT NULL PRIMARY KEY,
+item_name	VARCHAR2(100)	NOT NULL,
+ category_id	NUMBER	NOT NULL,
+ sel_price	NUMBER,
+ pur_price	NUMBER,
+ reg_date	DATE
+);
+
+-- レコードの登録
+INSERT INTO item2 VALUES ('0001', 'シャツ', 1, 1000, 500, '2009-09-20'); 
+INSERT INTO item2 VALUES ('0002', 'ホッチキス', 2, 500, 320, '2009-09-11'); 
+INSERT INTO item2 VALUES ('0009', 'マフラー', 1, 800, 500, NULL);
+
+COMMIT;
+
+■
+SELECT item_id, item_name
+FROM item
+UNION
+SELECT item_id, item_name
+FROM item2;
+
+■
+SELECT item_id, item_name
+FROM item
+INTERSECT
+SELECT item_id, item_name
+FROM item2;
+
+■
+SELECT item_id, item_name
+FROM item
+MINUS
+SELECT item_id, item_name
+FROM item2;
+
+■
+CREATE VIEW item_view AS 
+SELECT si.shop_id, si.shop_name, si.item_id, i.item_name, i.sel_price,
+si.quantity, sti.stock
+FROM shop_item si INNER JOIN item i ON si.item_id = i.item_id
+INNER JOIN stock_item sti ON si.item_id = sti.item_id 
+WHERE sti.house_id = 'S001';
+
+■
+SELECT * FROM item_view;
+
+■
+SELECT shop_id, shop_name, item_id, item_name, sel_price, quantity
+FROM (SELECT si.shop_id, si.shop_name, si.item_id, i.item_name,
+i.sel_price, si.quantity
+FROM shop_item si INNER JOIN item i ON si.item_id = i.item_id);
+
+■
+--WHERE句に集約関数は使えない
+SELECT item_id, item_name, sel_price
+FROM Item
+WHERE sel_price > (SELECT AVG(sel_price) FROM Item);
+
+■
+DROP INDEX idx_item_name;
+
+■
+CREATE SEQUENCE seq_dept 
+START WITH 5 
+NOCACHE;
+
+■
+INSERT INTO dept values (seq_dept.NEXTVAL, '人事部');
+
+COMMIT;
+
+SELECT dept_id, dept_name FROM dept;
+
+■
+DROP SEQUENCE seq_dept;

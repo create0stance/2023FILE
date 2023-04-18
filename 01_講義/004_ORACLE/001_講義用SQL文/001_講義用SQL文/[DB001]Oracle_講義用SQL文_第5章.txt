@@ -1,0 +1,45 @@
+■
+INSERT INTO dept VALUES (1,'総務部');
+INSERT INTO dept VALUES (2,'営業部');
+INSERT INTO dept VALUES (3,'経理部');
+INSERT INTO dept VALUES (4,'資材部');
+
+INSERT INTO employee VALUES (1, '1111', '山田太郎', 1, '千葉県', '2009/09/09', 1);
+INSERT INTO employee VALUES (2, '2222', '高橋健一', 1, '埼玉県', '2009/09/10', 1);
+INSERT INTO employee VALUES (3, '3333', '鈴木花子', 2, '東京都', '2009/09/10', 2);
+INSERT INTO employee VALUES (4, '4444', '佐々木良子', 2, '埼玉県', '2009/09/14', 3);
+
+
+COMMIT;
+
+
+■
+SELECT emp_id, emp_name, address FROM employee;
+
+■
+SELECT * FROM employee;
+
+■
+SELECT emp_id AS id FROM employee;
+
+■
+SELECT DISTINCT address FROM employee;
+
+■
+SELECT emp_name, dept_id FROM employee WHERE dept_id = 1;
+
+■
+UPDATE employee SET emp_pass = '7777';
+
+COMMIT;
+
+■
+UPDATE employee SET emp_pass = '1111' WHERE dept_id = 1;
+
+COMMIT;
+
+■
+DELETE FROM employee WHERE emp_id = 4;
+
+COMMIT;
+

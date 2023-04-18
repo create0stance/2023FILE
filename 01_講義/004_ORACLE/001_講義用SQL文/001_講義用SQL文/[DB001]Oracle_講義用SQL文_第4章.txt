@@ -1,0 +1,18 @@
+Å°
+CREATE TABLE dept(
+  dept_id NUMBER(2) PRIMARY KEY,
+  dept_name VARCHAR2(20) NOT NULL
+);
+
+CREATE TABLE employee (
+  emp_id NUMBER(5) PRIMARY KEY,
+  emp_pass VARCHAR2(10) NOT NULL,
+  emp_name VARCHAR2(20) NOT NULL,
+  gender NUMBER(1) NOT NULL,
+  address VARCHAR2(30),
+  birthday DATE,
+  dept_id NUMBER(2) NOT NULL REFERENCES dept(dept_id)
+);
+
+Å°
+DROP TABLE employee;

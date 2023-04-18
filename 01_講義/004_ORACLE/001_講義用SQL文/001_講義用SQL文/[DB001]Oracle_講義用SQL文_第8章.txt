@@ -1,0 +1,31 @@
+Å°
+SELECT COUNT(*) FROM item;
+
+Å°
+SELECT COUNT(sel_price) FROM item;
+
+Å°
+SELECT SUM(sel_price) FROM item;
+
+Å°
+SELECT AVG(sel_price) FROM item;
+
+Å°
+SELECT MAX(sel_price), MIN(sel_price) FROM item;
+
+Å°
+SELECT category_id, COUNT(*)
+  FROM Item
+GROUP BY category_id;
+
+Å°
+SELECT pur_price, COUNT(*)
+  FROM Item
+WHERE category_id = 1
+GROUP BY pur_price;
+
+Å°
+SELECT category_id, COUNT (*)
+  FROM Item
+  GROUP BY category_id
+HAVING COUNT(*) = 2;
