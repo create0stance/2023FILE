@@ -1,4 +1,5 @@
--- å•†å“ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’ä½œæˆ
+DROP TABLE item;
+-- ¤•iƒe[ƒuƒ‹‚ğì¬
 CREATE TABLE item(
     item_id CHAR(4) PRIMARY KEY,
     item_name VARCHAR2(100) NOT NULL,
@@ -8,18 +9,18 @@ CREATE TABLE item(
     reg_date DATE
 );
 
--- ãƒ¬ã‚³ãƒ¼ãƒ‰ã®æŒ¿å…¥
-INSERT INTO item VALUES ('0001', 'ã‚·ãƒ£ãƒ„', 1, 1000, 500, '2009-09-20');
-INSERT INTO item VALUES ('0002', 'ãƒ›ãƒƒãƒã‚­ã‚¹', 2, 500, 320, '2009-09-11');
-INSERT INTO item VALUES ('0003', 'ã‚»ãƒ¼ã‚¿ãƒ¼', 1, 4000, 2800, NULL);
-INSERT INTO item VALUES ('0004', 'åŒ…ä¸', 3, 3000, 2800, '2009-09-20');
-INSERT INTO item VALUES ('0005', 'ãƒ•ãƒ©ã‚¤ãƒ‘ãƒ³', 3, 5000, 2800, '2009-01-15');
-INSERT INTO item VALUES ('0006', 'ãƒ•ã‚©ãƒ¼ã‚¯', 3, NULL, 2800, '2009-09-20');
-INSERT INTO item VALUES ('0007', 'ã‚¹ãƒ—ãƒ¼ãƒ³', 3, 790, 2800, '2008-04-28');
-INSERT INTO item VALUES ('0008', 'ãƒœãƒ¼ãƒ«ãƒšãƒ³', 2, NULL, 2800, '2009-11-11');
-
-INSERT INTO item VALUES ('0009', '%ãƒœãƒ¼ãƒ«ãƒšãƒ³', 2, NULL, 2800, '2009-11-11');
+-- ƒŒƒR[ƒh‚Ì‘}“ü
+INSERT INTO item VALUES ('0001', 'ƒVƒƒƒc', 1, 1000, 500, '2009-09-20');
+INSERT INTO item VALUES ('0002', 'ƒzƒbƒ`ƒLƒX', 2, 500, 320, '2009-09-11');
+INSERT INTO item VALUES ('0003', 'ƒZ[ƒ^[', 1, 4000, 2800, NULL);
+INSERT INTO item VALUES ('0004', '•ï’š', 3, 3000, 2800, '2009-09-20');
+INSERT INTO item VALUES ('0005', 'ƒtƒ‰ƒCƒpƒ“', 3, 5000, 2800, '2009-01-15');
+INSERT INTO item VALUES ('0006', 'ƒtƒH[ƒN', 3, NULL, 2800, '2009-09-20');
+INSERT INTO item VALUES ('0007', 'ƒXƒv[ƒ“', 3, 790, 2800, '2008-04-28');
+INSERT INTO item VALUES ('0008', 'ƒ{[ƒ‹ƒyƒ“', 2, NULL, 2800, '2009-11-11');
+INSERT INTO item VALUES ('0009', 'ƒ{[ƒ‹ƒyƒ“20%Š„ˆø', 2, NULL, 2440, '2009-11-11');
 COMMIT;
+
 
 SELECT * FROM item;
 SELECT * FROM item WHERE sel_price = NULL;
@@ -39,23 +40,23 @@ SELECT item_name, category_id, sel_price
     FROM item
     WHERE NOT sel_price >= 1000;
 
--- ãƒã‚¤ãƒ•ãƒ³ã‚’å«ã‚€    
-SELECT item_name FROM item WHERE item_name LIKE '%ãƒ¼%';
--- ãƒã‚¤ãƒ•ãƒ³ã§çµ‚ã‚ã‚‹
-SELECT item_name FROM item WHERE item_name LIKE '%ãƒ¼';
--- äºŒæ–‡å­—ç›®ãŒãƒã‚¤ãƒ•ãƒ³
-SELECT item_name FROM item WHERE item_name LIKE '_ãƒ¼%';
--- %ã‚’å«ã‚€æ–‡å­—
+-- ƒnƒCƒtƒ“‚ğŠÜ‚Ş    
+SELECT item_name FROM item WHERE item_name LIKE '%[%';
+-- ƒnƒCƒtƒ“‚ÅI‚í‚é
+SELECT item_name FROM item WHERE item_name LIKE '%[';
+-- “ñ•¶š–Ú‚ªƒnƒCƒtƒ“
+SELECT item_name FROM item WHERE item_name LIKE '_[%';
+-- %‚ğŠÜ‚Ş•¶š
 SELECT item_name FROM item WHERE item_name LIKE '%!%%' ESCAPE '!';
--- ãƒã‚¤ãƒ•ãƒ³ã‚’å«ã¾ãªã„
-SELECT item_name FROM item WHERE item_name NOT LIKE '%ãƒ¼%';
+-- ƒnƒCƒtƒ“‚ğŠÜ‚Ü‚È‚¢
+SELECT item_name FROM item WHERE item_name NOT LIKE '%[%';
 
--- BETWEEN ãƒ»ãƒ»ãƒ»å¯èª­æ€§ã¨å‡¦ç†é€Ÿåº¦ã®å‘ä¸ŠãŒè¦‹è¾¼ã‚ã‚‹
+-- BETWEEN EEE‰Â“Ç«‚Æˆ—‘¬“x‚ÌŒüã‚ªŒ©‚ß‚é
 SELECT item_name, sel_price, reg_date
     FROM item
     WHERE reg_date BETWEEN '2008-04-28' AND '2009-09-11';
 
--- ä¸ç­‰å·ã‚’ä½¿ã†æ›¸å¼
+-- •s“™†‚ğg‚¤‘®
 SELECT item_name, sel_price, reg_date
     FROM item
     WHERE reg_date >= '2008-04-28' AND reg_date <= '2009-09-11';
@@ -64,29 +65,29 @@ SELECT item_name, sel_price, TO_CHAR(reg_date,'YYYY/MM/DD')
     FROM item
     WHERE reg_date BETWEEN TO_DATE('2008/04/28') AND TO_DATE('2009/09/11');
     
--- INå¥
+-- IN‹å
 SELECT item_name, sel_price FROM item WHERE sel_price IN (500,790,1000);
--- ORã‚’ä½¿ã†ã‚ˆã‚Šæ¥½ï¼
+-- OR‚ğg‚¤‚æ‚èŠyI
 SELECT item_name, sel_price FROM item WHERE sel_price = 500 OR sel_price = 790 OR sel_price = 1000;
 
 ----------------------------------
---é›†ç´„
+--W–ñ
 ----------------------------------
 SELECT * FROM item;
 
--- ä»¶æ•°ã‚’å–å¾—ã™ã‚‹
+-- Œ”‚ğæ“¾‚·‚é
 SELECT COUNT(*) FROM item;
 SELECT COUNT(*) FROM item WHERE category_id = 3 ;
 SELECT COUNT(sel_price) FROM item WHERE category_id = 3 ;
 
--- å¹³å‡å€¤ã®å–å¾—
+-- •½‹Ï’l‚Ìæ“¾
 SELECT * FROM item;
 SELECT ROUND(AVG(sel_price),1) FROM item;
 
--- åˆè¨ˆå€¤ã®è¨ˆç®—
+-- ‡Œv’l‚ÌŒvZ
 SELECT * FROM item;
 SELECT SUM(sel_price) FROM item;
--- æœ€å¤§å€¤/æœ€å°å€¤ã®å–å¾—
+-- Å‘å’l/Å¬’l‚Ìæ“¾
 SELECT MAX(sel_price), MIN(sel_price) FROM item;
 
 -- GroupBy
@@ -99,34 +100,53 @@ SELECT
     pur_price,
     COUNT(*)
     FROM item
-    -- â‘ whereå¥ã§çµã‚Šè¾¼ã¾ã‚Œã‚‹
+    -- ‡@where‹å‚Åi‚è‚Ü‚ê‚é
     WHERE category_id = 1
-    -- â‘¡GROUP BYå¥ã§ã‚°ãƒ«ãƒ¼ãƒ”ãƒ³ã‚°ã•ã‚Œã‚‹
+    -- ‡AGROUP BY‹å‚ÅƒOƒ‹[ƒsƒ“ƒO‚³‚ê‚é
     GROUP BY pur_price
     ;
 
--- SQLã®è©•ä¾¡æº–
+-- SQL‚Ì•]‰¿€
 /*
-ã€SQLã®è¨˜è¿°é †åºã€‘
-â€ƒ1. selectå¥ â‡’ åˆ—(ã‚«ãƒ©ãƒ )æƒ…å ±ã‚’æŒ‡å®š
-â€ƒ2. fromå¥ â‡’ ãƒ†ãƒ¼ãƒ–ãƒ«æƒ…å ±ã‚’å–å¾—
-â€ƒ3. joinå¥ â‡’ è¤‡æ•°ãƒ†ãƒ¼ãƒ–ãƒ«ã®çµåˆå‡¦ç†
-â€ƒ4. whereå¥ â‡’ çµã‚Šè¾¼ã¿æ¡ä»¶ã®æŒ‡å®š
-â€ƒ5. group byå¥ â‡’ ã‚°ãƒ«ãƒ¼ãƒ—æ¡ä»¶ã®æŒ‡å®š
-â€ƒ6. havingå¥ â‡’ ã‚°ãƒ«ãƒ¼ãƒ—åŒ–å¾Œã®çµã‚Šè¾¼ã¿æ¡ä»¶ã®æŒ‡å®š
-â€ƒ7. order byå¥ â‡’ ã‚½ãƒ¼ãƒˆé †ã®æŒ‡å®š
+ySQL‚Ì‹Lq‡˜z
+1. select‹å Ë —ñ(ƒJƒ‰ƒ€)î•ñ‚ğw’è…
+2. from‹å Ë ƒe[ƒuƒ‹î•ñ‚ğæ“¾…
+3. join‹å Ë •¡”ƒe[ƒuƒ‹‚ÌŒ‹‡ˆ—ã
+4. where‹å Ë i‚è‚İğŒ‚Ìw’è¡
+5. group by‹å Ë ƒOƒ‹[ƒvğŒ‚Ìw’è¡
+6. having‹å Ë ƒOƒ‹[ƒv‰»Œã‚Ìi‚è‚İğŒ‚Ìw’è¾
+7. order by‹å Ë ƒ\[ƒg‡‚Ìw’è 
 
-ã€SQLã®å®Ÿè¡Œé †åºã€‘
-â€ƒ1. fromå¥ â‡’ ãƒ†ãƒ¼ãƒ–ãƒ«æƒ…å ±ã‚’å–å¾—
-â€ƒ2. joinå¥ â‡’ è¤‡æ•°ãƒ†ãƒ¼ãƒ–ãƒ«ã®çµåˆå‡¦ç†
-â€ƒ3. whereå¥ â‡’ çµã‚Šè¾¼ã¿æ¡ä»¶ã®æŒ‡å®š
-â€ƒ4. group byå¥ â‡’ ã‚°ãƒ«ãƒ¼ãƒ—æ¡ä»¶ã®æŒ‡å®š
-â€ƒ5. havingå¥ â‡’ ã‚°ãƒ«ãƒ¼ãƒ—åŒ–å¾Œã®çµã‚Šè¾¼ã¿æ¡ä»¶ã®æŒ‡å®š
-â€ƒ6. selectå¥ â‡’ åˆ—(ã‚«ãƒ©ãƒ )æƒ…å ±ã‚’æŒ‡å®š
-â€ƒ7. order byå¥ â‡’ ã‚½ãƒ¼ãƒˆé †ã®æŒ‡å®š
+ySQL‚ÌÀs‡˜z
+1. from‹å Ë ƒe[ƒuƒ‹î•ñ‚ğæ“¾…
+2. join‹å Ë •¡”ƒe[ƒuƒ‹‚ÌŒ‹‡ˆ—ã
+3. where‹å Ë i‚è‚İğŒ‚Ìw’è¡
+4. group by‹å Ë ƒOƒ‹[ƒvğŒ‚Ìw’è¡
+5. having‹å Ë ƒOƒ‹[ƒv‰»Œã‚Ìi‚è‚İğŒ‚Ìw’è¾
+6. select‹å Ë —ñ(ƒJƒ‰ƒ€)î•ñ‚ğw’è…
+7. order by‹å Ë ƒ\[ƒg‡‚Ìw’è 
  */
- 
- --ã‚µãƒ–ã‚¯ã‚¨ãƒªï¼š
+
+
+
+---------------------------------------
+-- ORDER BY
+---------------------------------------
+SELECT * FROM item;
+-- ”Ì”„‰¿Ši‚Ì‚‚¢‚à‚Ì‚©‚çƒ\[ƒg
+SELECT * FROM item ORDER BY sel_price DESC;
+-- d“ü‚ê‰¿Ši‚Å~‡ƒ\[ƒg
+SELECT * FROM item ORDER BY pur_price DESC;
+-- d“ü‰¿Ši‚Å~‡‚ÉA¤•iID‚Å¸‡‚Éƒ\[ƒg
+SELECT * FROM item ORDER BY pur_price DESC,item_id ASC;
+-- NULL‚ğÅŒã‚Éƒ\[ƒg
+SELECT * FROM item ORDER BY sel_price DESC NULLS LAST;
+-- —ñ‚Ì•Ê–¼‚Åƒ\[ƒg‚·‚éA
+SELECT item_id AS id, item_name
+FROM item
+ORDER BY id ASC;
+
+ --ƒTƒuƒNƒGƒŠF
  SELECT * FROM item 
     ORDER BY sel_price
     ;

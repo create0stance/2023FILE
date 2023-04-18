@@ -1,0 +1,165 @@
+-- shop-itemテーブルの作成
+CREATE TABLE shop_item(
+    shop_id CHAR(4) NOT NULL,
+    shop_name VARCHAR2(200) NOT NULL,
+    item_id CHAR(4) NOT NULL,
+    quantity NUMBER NOT NULL,
+    PRIMARY KEY (shop_id, item_id)
+);
+
+INSERT INTO shop_item (shop_id, shop_name, item_id, quantity) VALUES ('000A', '東京', '0001', 30);
+INSERT INTO shop_item (shop_id, shop_name, item_id, quantity) VALUES ('000A', '東京', '0002', 50);
+INSERT INTO shop_item (shop_id, shop_name, item_id, quantity) VALUES ('000B', '仙台', '0002', 30);
+INSERT INTO shop_item (shop_id, shop_name, item_id, quantity) VALUES ('000B', '仙台', '0006', 10);
+INSERT INTO shop_item (shop_id, shop_name, item_id, quantity) VALUES ('000C', '大阪', '0003', 20);
+INSERT INTO shop_item (shop_id, shop_name, item_id, quantity) VALUES ('000C', '大阪', '0007', 70);
+INSERT INTO shop_item (shop_id, shop_name, item_id, quantity) VALUES ('000D', '福岡', '0001', 50);
+
+COMMIT;
+SELECT * FROM item;
+SELECT * FROM shop_item;
+SELECT shop_id,shop_name,quantity,item_id FROM shop_item;
+
+-- 内部結合の基本構文
+SELECT * FROM
+    -- 結合するテーブルの指定
+    shop_item INNER JOIN item
+    -- 結合条件の指定
+    ON shop_item.item_id = item.item_id;
+
+-- テーブルに別名を指定し、記述量を減らす
+SELECT * FROM
+    -- 結合するテーブルの指定
+    shop_item si INNER JOIN item i
+    -- 結合条件の指定
+    ON si.item_id = i.item_id;
+    
+-- 取得する列を指定する
+SELECT 
+    si.shop_id,si.shop_name,si.quantity,si.item_id,
+    i.item_name,i.category_id,i.sel_price,i.pur_price,i.reg_date
+    
+    FROM
+    -- 結合するテーブルの指定
+    shop_item si INNER JOIN item i
+    -- 結合条件の指定
+    ON si.item_id = i.item_id;
+    
+-- 条件を指定する
+SELECT 
+    si.shop_id,si.shop_name,si.item_id,
+    i.item_name,i.sel_price,si.quantity
+    FROM
+    -- 結合するテーブルの指定
+    shop_item si INNER JOIN item i
+    -- 結合条件の指定
+    ON si.item_id = i.item_id
+    -- 価格がNULLのものを除く
+    WHERE i.sel_price IS NOT NULL
+        -- 在庫が50未満の商品を絞り込む
+        AND si.quantity < 50
+    -- 在庫の少ない順に表示
+    ORDER BY si.quantity ASC 
+    ;
+    
+----------------------------------
+-- 外部結合
+----------------------------------
+select * from item;
+select * from shop_item;
+-- shop_itemに登録されているitem_idを確認
+select count(*),item_id from shop_item group by item_id order by item_id;
+-- 状態
+-- ①商品は0001～0009まで存在する
+-- ②店舗在庫と登録されている商品はID[0001,0002,0003,0006,0007]のみ
+-- 内部結合する
+SELECT * FROM item INNER JOIN shop_item
+    ON item.item_id = shop_item.item_id
+    ORDER BY item.item_id;
+-- 外部結合する
+SELECT * FROM item LEFT OUTER JOIN shop_item
+    ON item.item_id = shop_item.item_id
+    ORDER BY item.item_id;
+
+SELECT * FROM item LEFT OUTER JOIN shop_item
+    ON item.item_id = shop_item.item_id
+    WHERE shop_item.item_id IS NOT NULL
+    ORDER BY item.item_id;
+    
+--3つ以上のテーブルの結合
+CREATE TABLE stock_item(
+    house_id CHAR(4) NOT NULL,
+    item_id CHAR(4) NOT NULL,
+    stock NUMBER NOT NULL,
+    PRIMARY KEY(house_id, item_id)
+);
+
+INSERT INTO stock_item (house_id, item_id, stock) VALUES('S001', '0001', 0);
+INSERT INTO stock_item (house_id, item_id, stock) VALUES('S001', '0002',120);
+INSERT INTO stock_item (house_id, item_id, stock) VALUES('S001', '0003',200);
+INSERT INTO stock_item (house_id, item_id, stock) VALUES('S001', '0004',3);
+INSERT INTO stock_item (house_id, item_id, stock) VALUES('S001', '0005',0);
+INSERT INTO stock_item (house_id, item_id, stock) VALUES('S001', '0006',99);
+INSERT INTO stock_item (house_id, item_id, stock) VALUES('S001', '0007',999);
+INSERT INTO stock_item (house_id, item_id, stock) VALUES('S001', '0008',200);
+INSERT INTO stock_item (house_id, item_id, stock) VALUES('S002', '0001',10);
+INSERT INTO stock_item (house_id, item_id, stock) VALUES('S002', '0002',25);
+INSERT INTO stock_item (house_id, item_id, stock) VALUES('S002', '0003',34);
+INSERT INTO stock_item (house_id, item_id, stock) VALUES('S002', '0004',19);
+INSERT INTO stock_item (house_id, item_id, stock) VALUES('S002', '0005',99);
+INSERT INTO stock_item (house_id, item_id, stock) VALUES('S002', '0006',0);
+INSERT INTO stock_item (house_id, item_id, stock) VALUES('S002', '0007',0);
+INSERT INTO stock_item (house_id, item_id, stock) VALUES('S002', '0008',18);
+
+COMMIT;
+SELECT * FROM stock_item;
+SELECT * FROM item;
+SELECT * FROM shop_item;
+
+--3つのテーブルを結合する基本的な考え方
+--2つのテーブルを結合する
+SELECT * FROM 
+    stock_item sti INNER JOIN shop_item si
+        ON sti.item_id = sti.item_id
+        --  3つ目のテーブルを結合する
+        INNER JOIN item i 
+            ON i.item_id = sti.item_id
+    ;
+
+-- 各店舗で扱っている商品に関する店舗の在庫数と「S001」 倉庫の在庫数を求める
+--
+SELECT * FROM 
+    -- 各店舗で扱っている商品の店舗在庫数と、その商品の倉庫在庫数を求める。
+    shop_item si INNER JOIN stock_item sti
+        ON si.item_id = sti.item_id
+        -- 今回、知りたいのはS001倉庫の在庫にある商品のみ
+        WHERE sti.house_id = 'S001'
+        ;
+
+DROP TABLE emp;
+CREATE TABLE EMP
+    (EMPNO     NUMBER(4) NOT NULL,
+     ENAME     VARCHAR2(10),
+     JOB       VARCHAR2(9),
+     MGR       NUMBER(4),
+     HIREDATE  DATE,
+     SAL       NUMBER(7,2),
+     COMM      NUMBER(7,2),
+     DEPTNO    NUMBER(2));
+INSERT INTO emp VALUES(7369,'SMITH','CLERK',7902,'1980-12-17',800,null,20);
+INSERT INTO emp VALUES(7499,'ALLEN','SALESMAN',7698,'1981-02-20',1600,300,30);
+INSERT INTO emp VALUES(7521,'WARD','SALESMAN',7698,'1981-02-22',1250,500,30);
+INSERT INTO emp VALUES(7566,'JONES','MANAGER',7839,'1981-04-02',2975,null,20);
+INSERT INTO emp VALUES(7654,'MARTIN','SALESMAN',7698,'1981-09-28',1250,1400,30);
+INSERT INTO emp VALUES(7698,'BLAKE','MANAGER',7839,'1981-05-01',2850,null,30);
+INSERT INTO emp VALUES(7782,'CLARK','MANAGER',7839,'1981-06-09',2450,null,10);
+INSERT INTO emp VALUES(7788,'SCOTT','ANALYST',7566,'1987-04-19',3000,null,20);
+INSERT INTO emp VALUES(7839,'KING','PRESIDENT',null,'1981-11-17',5000,null,10);
+INSERT INTO emp VALUES(7844,'TURNER','SALESMAN',7698,'1981-09-08',1500,null,30);
+INSERT INTO emp VALUES(7876,'ADAMS','CLERK',7788,'1987-05-23',1100,null,20);
+INSERT INTO emp VALUES(7900,'JAMES','CLERK',7698,'1981-12-03',950,null,30);
+INSERT INTO emp VALUES(7902,'FORD','ANALYST',7566,'1981-12-03',3000,null,20);
+INSERT INTO emp VALUES(7934,'MILLER','CLERK',7782,'1982-01-23',1300,null,10);
+COMMIT;
+select * from emp;
+
