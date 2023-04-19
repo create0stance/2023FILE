@@ -1,3 +1,5 @@
+‡@Œ‹‡Žž‚ÌðŒŽw’è‚ÆA‹@c—ñ
+
 DROP TABLE item;
 -- ¤•iƒe[ƒuƒ‹‚ðì¬
 CREATE TABLE item(
@@ -109,22 +111,22 @@ SELECT
 -- SQL‚Ì•]‰¿€
 /*
 ySQL‚Ì‹Lq‡˜z
-1. select‹å Ë —ñ(ƒJƒ‰ƒ€)î•ñ‚ðŽw’è…
-2. from‹å Ë ƒe[ƒuƒ‹î•ñ‚ðŽæ“¾…
-3. join‹å Ë •¡”ƒe[ƒuƒ‹‚ÌŒ‹‡ˆ—ã
-4. where‹å Ë i‚èž‚ÝðŒ‚ÌŽw’è¡
-5. group by‹å Ë ƒOƒ‹[ƒvðŒ‚ÌŽw’è¡
-6. having‹å Ë ƒOƒ‹[ƒv‰»Œã‚Ìi‚èž‚ÝðŒ‚ÌŽw’è¾
-7. order by‹å Ë ƒ\[ƒg‡‚ÌŽw’è 
+E. select‹å Ë —ñ(ƒJƒ‰ƒ€)î•ñ‚ðŽw’èE
+E. from‹å Ë ƒe[ƒuƒ‹î•ñ‚ðŽæ“¾E
+E. join‹å Ë •¡”ƒe[ƒuƒ‹‚ÌŒ‹‡ˆ—E
+E. where‹å Ë i‚èž‚ÝðŒ‚ÌŽw’è¡
+E. group by‹å Ë ƒOƒ‹[ƒvðŒ‚ÌŽw’è¡
+E. having‹å Ë ƒOƒ‹[ƒv‰»Œã‚Ìi‚èž‚ÝðŒ‚ÌŽw’è¾
+E. order by‹å Ë ƒ\[ƒg‡‚ÌŽw’è 
 
 ySQL‚ÌŽÀs‡˜z
-1. from‹å Ë ƒe[ƒuƒ‹î•ñ‚ðŽæ“¾…
-2. join‹å Ë •¡”ƒe[ƒuƒ‹‚ÌŒ‹‡ˆ—ã
-3. where‹å Ë i‚èž‚ÝðŒ‚ÌŽw’è¡
-4. group by‹å Ë ƒOƒ‹[ƒvðŒ‚ÌŽw’è¡
-5. having‹å Ë ƒOƒ‹[ƒv‰»Œã‚Ìi‚èž‚ÝðŒ‚ÌŽw’è¾
-6. select‹å Ë —ñ(ƒJƒ‰ƒ€)î•ñ‚ðŽw’è…
-7. order by‹å Ë ƒ\[ƒg‡‚ÌŽw’è 
+E. from‹å Ë ƒe[ƒuƒ‹î•ñ‚ðŽæ“¾E
+E. join‹å Ë •¡”ƒe[ƒuƒ‹‚ÌŒ‹‡ˆ—E
+E. where‹å Ë i‚èž‚ÝðŒ‚ÌŽw’è¡
+E. group by‹å Ë ƒOƒ‹[ƒvðŒ‚ÌŽw’è¡
+E. having‹å Ë ƒOƒ‹[ƒv‰»Œã‚Ìi‚èž‚ÝðŒ‚ÌŽw’è¾
+E. select‹å Ë —ñ(ƒJƒ‰ƒ€)î•ñ‚ðŽw’èE
+E. order by‹å Ë ƒ\[ƒg‡‚ÌŽw’è 
  */
 
 
