@@ -1,0 +1,237 @@
+/*-------------------
+テーブル同士の演算
+--------------------*/
+-- テーブルの作成
+CREATE TABLE item2
+(item_id	CHAR(4)	NOT NULL PRIMARY KEY,
+item_name	VARCHAR2(100)	NOT NULL,
+ category_id	NUMBER	NOT NULL,
+ sel_price	NUMBER,
+ pur_price	NUMBER,
+ reg_date	DATE
+);
+
+-- レコードの登録
+INSERT INTO item2 VALUES ('0001', 'シャツ', 1, 1000, 500, '2009-09-20'); 
+INSERT INTO item2 VALUES ('0002', 'ホッチキス', 2, 500, 320, '2009-09-11'); 
+INSERT INTO item2 VALUES ('0009', 'マフラー', 1, 800, 500, NULL);
+
+COMMIT;
+
+SELECT * FROM item;
+SELECT * FROM item2;
+
+-- 和集合(UNION) --- 集合演算の中で利用頻度が高い
+SELECT * FROM item
+UNION
+SELECT * FROM item2;
+
+-- 重複行も抽出
+SELECT * FROM item
+UNION ALL 
+SELECT * FROM item2;
+
+-- 別システムで利用された類似データの統合、
+-- シャーディング（水平分割）されたテーブル、
+-- 似た内容のテーブルが複数存在する場合などに利用されることがある。
+
+-- 共通部分検索
+SELECT item_id, item_name
+FROM item
+INTERSECT
+SELECT item_id, item_name
+FROM item2;
+
+-- テーブルの引き算
+SELECT item_id, item_name
+FROM item
+MINUS
+SELECT item_id, item_name
+FROM item2;
+
+/*---------------------
+サブクエリ
+------------------------*/
+SELECT 
+    si.shop_id, si.shop_name, si.item_id, 
+    i.item_name,i.sel_price, si.quantity
+FROM shop_item si INNER JOIN item i 
+    ON si.item_id = i.item_id;
+--------------------------------------------------------    
+-- FROM句でのサブクエリ
+--------------------------------------------------------
+SELECT 
+    shop_id, shop_name, item_id, item_name, sel_price, quantity
+FROM (
+    SELECT 
+        si.shop_id , si.shop_name, si.item_id, 
+        i.item_name,i.sel_price, si.quantity
+    FROM shop_item si INNER JOIN item i 
+        ON si.item_id = i.item_id
+);
+
+-- unionした結果はORDER BY 出来ない
+SELECT * FROM item 
+   UNION ALL
+SELECT * FROM item2
+-- ORDER BY item_name
+;
+-- サブクエリで扱う
+SELECT * FROM (
+    SELECT * FROM item
+        UNION ALL 
+    SELECT * FROM item2
+) ORDER BY item_name;
+
+-- oracleはリミットが使えない
+-- ROWNUMが使える
+SELECT * FROM item ;
+SELECT * FROM item 
+    WHERE ROWNUM <= 3
+;
+-- ORDER BYと合わせて使うと・・・
+SELECT * FROM item ORDER BY sel_price;
+-- WHERE句が先に評価されるため初期の並び順で3件取得し、その後ソートされる
+SELECT * FROM item ;
+SELECT * FROM item 
+    WHERE ROWNUM <= 3
+    ORDER BY sel_price
+    ;
+-- サブクエリで解決
+SELECT * FROM (SELECT * FROM item ORDER BY item.sel_price) 
+    WHERE ROWNUM <= 3
+;
+--------------------------------------------------------
+-- サブクエリ：使いどころは多く便利だが、注意点も・・・
+--------------------------------------------------------
+-- 複数クエリを発行するためパフォーマンスが落ちる
+-- 可読性が落ちる
+--------------------------------------------------------
+SELECT 
+    si.shop_id , si.shop_name, si.item_id, 
+    i.item_name,i.sel_price, si.quantity
+    FROM shop_item si INNER JOIN item i 
+        ON si.item_id = i.item_id;
+
+-- withと併用し可読性を上げる
+WITH item_join AS (
+    SELECT 
+        si.shop_id , si.shop_name, si.item_id, 
+        i.item_name,i.sel_price, si.quantity
+    FROM shop_item si INNER JOIN item i 
+        ON si.item_id = i.item_id
+)
+SELECT * FROM item_join WHERE shop_id = '000A' AND quantity > 30
+UNION
+SELECT * FROM item_join WHERE shop_id = '000B' AND quantity > 10
+;
+--------------------------------------------------------    
+-- IN句でのサブクエリ
+--------------------------------------------------------
+SELECT * FROM shop_item;
+SELECT * FROM item;
+-- 販売価格が3000円以下の商品在庫を持つ店舗情報を取得
+SELECT item_id FROM item WHERE sel_price <=3000;
+-- result ('0001','002','0004','0007')
+SELECT * FROM shop_item WHERE item_id IN('0001','002','0004','0007');
+
+-- サブクエリを使うと・・・
+SELECT * FROM shop_item WHERE item_id IN(
+    SELECT item_id FROM item WHERE sel_price <=3000
+);
+
+-- ジョインしてもOK
+SELECT si.shop_id,si.shop_name,si.item_id,si.quantity
+    FROM shop_item si INNER JOIN item i
+    ON si.item_id = i.item_id
+    WHERE i.sel_price <= 3000;
+    
+--------------------------------------------------------    
+-- スカラ・サブクエリ（必ず単一の値を取得するサブクエリ）
+--------------------------------------------------------
+SELECT * FROM item;
+-- ★平均販売価格より高額な商品だけ取得する
+--WHERE 句に集約関数は使えない
+SELECT item_id, item_name, pur_price
+    FROM item
+    WHERE sel_price > AVG(sel_price);
+
+-- 平均値を求めるクエリをサブクエリとして利用する
+SELECT AVG(sel_price) FROM item;
+SELECT item_id, item_name, pur_price
+    FROM item
+    WHERE sel_price > (SELECT AVG(sel_price) FROM item);
+ 
+-- 単一の値を返すサブクエリは、値を記載できる箇所ならどこでも記載できる！！
+SELECT item_id, item_name, pur_price,(SELECT AVG(sel_price) FROM item) as "平均価格"
+    FROM item
+    WHERE sel_price > (SELECT AVG(sel_price) FROM item);
+
+-- カテゴリに含まれる商品の平均販売価格が、全商品の平均販売価格より高いカテゴリを取得
+SELECT 
+    category_id , 
+    AVG(sel_price) "カテゴリ平均価格",
+    (SELECT AVG(sel_price) FROM item) as "全商品平均価格"
+    FROM ITEM
+    GROUP BY category_id
+    HAVING AVG(sel_price) > (SELECT AVG(sel_price) FROM item)
+;
+-- 相関サブクエリ
+SELECT item_id, item_name, sel_price,category_id FROM item i1;
+SELECT item_id, item_name, sel_price
+    FROM item i1
+    WHERE sel_price > (
+        SELECT AVG(sel_price) FROM item i2
+            WHERE i1.category_id = i2.category_id
+);
+
+SELECT item_id, item_name, sel_price,category_id FROM item i1;
+-- 1行目の処理：カテゴリid=1
+-- サブクエリ
+SELECT AVG(sel_price) FROM item i2
+            WHERE 1 = i2.category_id;
+-- result : 2500
+SELECT item_id, item_name, sel_price
+    FROM item i1
+    WHERE sel_price > 2500 AND ITEM_ID = '0001';
+-- result : 結果なし
+
+/*-------------------
+シーケンス
+--------------------*/
+-- シーケンス:自動採番を行うためのオブジェクト
+--　シーケンスの作成
+CREATE SEQUENCE seq_dept 
+START WITH 5 
+NOCACHE;
+-- ※casheされると連番が飛び番号になる場合がある。
+-- CURRVAL:シーケンスの現在の値を取得
+select seq_dept.CURRVAL from dual;
+--　NEXTVAL：シーケンスが保持している順序（連番）が増減して、最新の値を返す
+select seq_dept.NEXTVAL from dual;
+
+--補足：dual = ダミーテーブル：fromが不要なクエリ実行時に使用する
+
+INSERT INTO dept values (seq_dept.NEXTVAL, '人事部');
+COMMIT;
+
+SELECT * FROM item;
+
+-- シーケンスの削除
+DROP SEQUENCE seq_dept;
+CREATE SEQUENCE seq_dept 
+    START WITH 5 
+    NOCACHE;
+
+--インデックス
+--Oracleでは、表作成時に主キー制約・UNIQUE制約を指定すると、 自動的にインデックスが作成される。
+/*
+■メリット
+表のなかの特定の行を早く検索することができる。
+ソートの作業を省略できる。
+■デメリット
+索引のための領域が必要である。
+データの入力や変更の作業に、索引変更のためのオーバーヘッドが加わる。
+*/
+SELECT * FROM item WHERE item_name = '';
+CREATE INDEX idx_item_name ON item (item_name);
