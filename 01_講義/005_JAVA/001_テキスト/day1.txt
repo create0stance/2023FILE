@@ -23,3 +23,30 @@ outフィールドに標準出力オブジェクトを保持している。
 
 ■実行構成
 どのプロジェクトのどのメインクラスのmain( )メソッドをどのように起動するかの
+
+// コンソールに文字列を出力する
+		System.out.println("ようこそ！Javaへ！！");
+		
+		/*
+		 * 現在の標準出力先を保持する
+		 */
+		PrintStream sysOut = System.out;
+		
+		/*
+         * 標準出力の出力先をファイルに切り変える
+         */
+        FileOutputStream fos = new FileOutputStream("out.txt");
+        PrintStream ps = new PrintStream(fos);
+        System.setOut(ps); 
+
+        // 出力する
+        System.out.println("ファイルへ書き込む！");
+
+        // ファイルをクローズ
+        ps.close();
+        fos.close();
+
+        /*
+         * 標準出力をデフォルトに戻す
+         */
+        System.setOut(sysOut);
