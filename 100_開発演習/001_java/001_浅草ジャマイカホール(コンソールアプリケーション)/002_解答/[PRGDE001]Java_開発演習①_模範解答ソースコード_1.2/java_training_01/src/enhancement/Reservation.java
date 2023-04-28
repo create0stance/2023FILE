@@ -26,12 +26,12 @@ public class Reservation {
 //        }
 
         // 実行確認用に座席を予約済みにする処理（※残席15席以下）
-        for (int i = 0; i < seatArray.length; i++) {
-            // 座席の半数を予約済みにする
-            if (i % 2 == 0) {
-                seatArray[i] = true;
-            }
-        }
+//        for (int i = 0; i < seatArray.length; i++) {
+//            // 座席の半数を予約済みにする
+//            if (i % 2 == 0) {
+//                seatArray[i] = true;
+//            }
+//        }
         // 上記の処理で座席の半数が予約済みになるため+1席分予約済みにして16席
         seatArray[1] = true;
 
