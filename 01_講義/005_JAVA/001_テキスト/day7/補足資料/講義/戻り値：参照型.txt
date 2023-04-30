@@ -1,0 +1,4 @@
+public String[] tellHobbies() {
+String[] hobbies = {"ƒ‰ƒ“ƒjƒ“ƒO","‰f‰æŠÓÜ","“Ç‘"};
+return hobbies;
+}
