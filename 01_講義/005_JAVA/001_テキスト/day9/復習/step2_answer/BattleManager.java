@@ -15,13 +15,13 @@ public class BattleManager {
 	public static String bottomLine = "＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿";
 	
 	/** 整形用　上線 */
-	public static String topLine = "￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣";
+	private static String topLine = "￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣";
 	
 	/** 整形用　でこぼこ線 */
-	public static String bumpLine = "＼／＼／＼／＼／＼／＼／＼／＼／＼／＼";
+	private static String bumpLine = "＼／＼／＼／＼／＼／＼／＼／＼／＼／＼";
 	
 	/** バトル案内者 */
-	public static String battleInfomator = "(U・ᴥ・U)";
+	private static String battleInfomator = "(U・ᴥ・U)";
 	
 	/**
 	 * キャラクター2人をバトルさせ、勝者をリターン

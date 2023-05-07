@@ -11,16 +11,16 @@ import java.io.InputStreamReader;
 public class BattleManager {
 	
 	/** 整形用　でこぼこ線 */
-	public static String bumpLine = "＼／＼／＼／＼／＼／＼／＼／＼／＼／＼";
+	private static String bumpLine = "＼／＼／＼／＼／＼／＼／＼／＼／＼／＼";
 	
 	/** バトル案内者 */
-	public static String battleInfomator = "(U・ᴥ・U)";
+	private static String battleInfomator = "(U・ᴥ・U)";
 	
 	/** 整形用　下線 */
-	public static String bottomLine = "＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿";
+	private static String bottomLine = "＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿";
 	
 	/** 整形用　上線 */
-	public static String topLine = "￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣";
+	private static String topLine = "￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣";
 	
 	/**
 	 * キャラクター2人をバトルさせ、勝者をリターン

@@ -11,16 +11,16 @@ import java.io.InputStreamReader;
 public class Main {
 	
 	/** 整形用　中央線 */
-	public static String centerLine = "-----------------------------------------";
+	private static String centerLine = "-----------------------------------------";
 	
 	/** 整形用　下線 */
-	public static String bottomLine = "＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿";
+	private static String bottomLine = "＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿";
 	
 	/** 整形用　上線 */
-	public static String topLine = "￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣";
+	private static String topLine = "￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣";
 	
 	/** 案内者アイコン */
-	public static String infomator = "(･8･)";
+	private static String infomator = "(･8･)";
 	
 	/**
 	 * メインメソッド
