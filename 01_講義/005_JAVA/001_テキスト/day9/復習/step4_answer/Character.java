@@ -1,4 +1,4 @@
-package review_obj.step2_answer;
+package review_obj.step4_answer;
 
 import java.util.Random;
 
@@ -6,37 +6,11 @@ import java.util.Random;
  * キャラクタークラス
  *
  */
-public class Character {
-
-	/** 性別文字列配列 */
-	public static String[] genderStrings = { "未選択", "男性", "女性", "その他" };
-
-	/** プレイヤーid */
-	private int id;
-
-	/** 名前 */
-	private String name;
-
-	/** 性別 1:男性、2:女性、3:その他 0:未選択 */
-	private int gender;
-
-	/** 基礎体力 */
-	private int baseHp;
-
-	/** 基礎攻撃力 */
-	private int baseAtackPoint;
-
-	/**
-	 * フィールドに初期値をセット
-	 */
-	private Character() {
-		setId(1);
-		setName("未設定");
-		setGender(0);
-		setBaseHp(0);
-		setBaseAtackPoint(0);
+public class Character extends AbstractCharacter {
+	
+	protected Character() {
+		super();
 	}
-
 	/**
 	 * キャラクター作成時のステータスを決定
 	 * @param id キャラクターID
@@ -44,17 +18,22 @@ public class Character {
 	 * @param gender 性別
 	 */
 	public Character(int id, String name, int gender) {
-		// 引数なしコンストラクタを呼び出し、初期値をセット
-		this();
-		// 各フィールドに引数で受け取った値をsetterを通しセット
-		setId(id);
-		setName(name);
-		setGender(gender);
-		// hpと攻撃力をセット
-		setBaseHp(calcBaseHpAtCreateObj(getGender()));
-		setBaseAtackPoint(calcBaseAtackPowerAtCreateObj(getGender()));
+		super(id,name, gender);
 	}
+	
+	@Override
+	public void outputAtackVoice() {
+		if (getGender() == Setting.maleStringIndex) {
+			System.out.println("「うわーーーーーーー！」");
 
+		} else if (getGender() == Setting.femaleStringIndex) {
+			System.out.println("「あちょーーーーーー！」");
+
+		} else {
+			System.out.println("「ほにゃん」");
+		}
+
+	}
 	/**
 	 * プレーヤー情報をコンソール出力
 	 */
@@ -64,6 +43,9 @@ public class Character {
 		System.out.println("性別：" + getGendeWithString(gender));
 		System.out.println("HP：" + getBaseHp());
 		System.out.println("攻撃力：" + getBaseAtackPoint());
+		System.out.print("攻撃時の掛け声：");
+		outputAtackVoice();
+		System.out.println("作成日時：" + Common.getDateWithString(getCreateDate()));
 	}
 
 	/**
@@ -72,7 +54,7 @@ public class Character {
 	 * @return 性別文字列
 	 */
 	public static String getGendeWithString(int gender) {
-		return genderStrings[gender];
+		return Setting.genderStrings[gender];
 	}
 
 	/**
@@ -83,9 +65,9 @@ public class Character {
 	 */
 	public static int calcBaseHpAtCreateObj(int gender) {
 		// ランダム値を取得
-		int hp = getRandumNumFromXtoY(1000, 5000);
+		int hp = getRandumNumFromXtoY(Setting.hpLowerAtCreateObj, Setting.hpUpperAtCreateObj);
 		// 性別の違いによる倍率計算をしリターン
-		return gender == 1 ? (int) (hp * 1.5) : hp;
+		return gender == Setting.maleStringIndex ? (int) (hp * Setting.maleHpMagnification) : hp;
 	}
 
 	/**
@@ -93,9 +75,9 @@ public class Character {
 	 */
 	public static int calcBaseAtackPowerAtCreateObj(int gender) {
 		// ランダム値を取得
-		int hp = getRandumNumFromXtoY(100, 1000);
+		int hp = getRandumNumFromXtoY(Setting.atackPowerLowerAtCreateObj, Setting.atackPowerUpaerAtCreateObj);
 		// 性別の違いによる倍率計算をしリターン
-		return gender == 2 ? (int) (hp * 2.0) : hp;
+		return gender == Setting.femaleStringIndex ? (int) (hp * Setting.maleAtackPowerMagnification) : hp;
 	}
 
 	/**
@@ -133,7 +115,7 @@ public class Character {
 	 * @param gender セットする数値
 	 */
 	public void setGender(int gender) {
-		if (gender > -1 && gender < genderStrings.length) {
+		if (gender > -1 && gender < Setting.genderStrings.length) {
 			this.gender = gender;
 		}
 	}
@@ -143,10 +125,10 @@ public class Character {
 	 * @param baseHp セットする基礎体力
 	 */
 	public void setBaseHp(int baseHp) {
-		if (baseHp >= 0 && baseHp <= 10000) {
+		if (baseHp >= Setting.hpLower && baseHp <= Setting.hpUpper) {
 			this.baseHp = baseHp;
 		} else {
-			this.baseHp = 0;
+			this.baseHp = Setting.hpLower;
 		}
 	}
 
@@ -155,10 +137,10 @@ public class Character {
 	 * @param baseAtackPoint セットする基礎攻撃力
 	 */
 	public void setBaseAtackPoint(int baseAtackPoint) {
-		if (baseAtackPoint >= 0 && baseAtackPoint <= 10000) {
+		if (baseAtackPoint >= Setting.atackPowerLower && baseAtackPoint <= Setting.atackPowerUpaer) {
 			this.baseAtackPoint = baseAtackPoint;
 		} else {
-			this.baseAtackPoint = 0;
+			this.baseAtackPoint = Setting.atackPowerLower;
 		}
 	}
 
@@ -201,5 +183,7 @@ public class Character {
 	public int getBaseHp() {
 		return baseHp;
 	}
+
+	
 
 }
