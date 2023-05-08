@@ -1,10 +1,11 @@
-Eclipes->新規->springプロジェクト作成できるか確認。
-席移動
+明日に回す：Eclipes->新規->springプロジェクト作成できるか確認。
+			席移動
+			プチ講義
 
 
 ★日直
-立石　太郎　さん
-星川　紘輝 さん
+前田　恭佑　さん
+富樫　亮太 さん
 
 ・点呼：
 ・挨拶運動
@@ -18,33 +19,60 @@ Eclipes->新規->springプロジェクト作成できるか確認。
 失礼します。
 
 ・目標確認：2分
-・1分間スピーチ：最近、継続していること！
+・1分間スピーチ：GWの思い出と次の長期休暇でやりたいこと。
 ・連絡事項：以下事項を皆様にお伝えください。
-	・本日の流れ：Java8日目
+	・本日の流れ：Java9日目！内容重い！！！
 	・復習問題
-	・コンストラクタ
-	・staticメンバ」
-	・練習問題：17～18
+	・クラスライブラリ
+	・継承
+	・練習問題：19～21
 
 	・総括
 		口頭報告：
 			
 			↓秋山
-			大西稀斗さん
-			名古屋みなみさん
+			長谷川　拓朗さん
+			及川　颯偲さん
 
 			↓佐々木
-			後藤大翔さん
-			水野　優太さん
+			青木　稜さん
+			富樫　亮太さん
 
 
 
+クラスライブラリとは？
+Stringクラスを例に使い方を説明。
+サンプルコードの説明。
+～138Pまで
+
+①クラスライブラリとは？
+汎用的な良く使う機能をまとめたもの。
+
+②クラスライブラリを活用するメリットとは？
+③読み込みできた範囲での理解できた点、疑問点、
+難しかった点、不明点などを共有
+try-catch -> data型 parse
+setLenient(boolean a)厳密チェック
+util -> java.util
+数が多い！
+Bigdecimal("100000000000011l") => 
+indexOf->(int) char
+method = クラス名#メソッド名
+④疑問点・不明点の解決方法を考える！
+⑤どこまで進んだか共有。
 
 
+午後一
+クラス型の変数
 
-
-
-
+継承
+①継承とは？
+②継承とコンストラクタ
+③継承とアクセス修飾子
+④継承とオーバーライド
+⑤継承と型：アップキャストとダウンキャスト
+⑥final修飾子：定数
+⑦オブジェクトクラス
 
 渡辺さん
 完売までループ / キャンセル機能
@@ -75,3 +103,30 @@ Eclipes->新規->springプロジェクト作成できるか確認。
 仕事を正しく把握する
 報告
 挨拶
+
+private int displaySize ;
+	
+	@Override
+	public void showInfomation() {
+		super.showInfomation();
+		showDisplaySizeInfomation();
+	}
+	
+	public void showDisplaySizeInfomation() {
+		System.out.println("ディスプレイサイズは" + displaySize + "inchです。");
+	}
+
+	/**
+	 * @return displaySize
+	 */
+	public int getDisplaySize() {
+		return displaySize;
+	}
+
+	/**
+	 * @param displaySize セットする displaySize
+	 */
+	public void setDisplaySize(int displaySize) {
+		this.displaySize = displaySize;
+	}
+	
