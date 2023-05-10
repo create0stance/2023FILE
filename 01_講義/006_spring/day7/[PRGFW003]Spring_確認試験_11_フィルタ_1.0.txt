@@ -1,0 +1,43 @@
+■フィルタ
+1. フィルタをSpringのDIコンテナに登録するために、@Componentアノテーションを付与する。
+正しい付与場所を選べ。
+①
+public class Message01Filter implements Filter {
+	②
+	@Override
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
+		③
+		System.out.println("Done Message01Filter");
+		chain.doFilter(request, response);
+	}
+④
+}
+
+1. ①
+2. ②
+3. ③
+4. ④
+
+正答：1
+解説：
+『Spring Framework』第11章/1種類のフィルタを利用する方法
+
+フィルタをSpringのDIコンテナに登録するために、クラスブロックに@Componentアノテーションを付与します。
+したがって、選択肢①が正解です。
+
+
+■フィルタ
+2. フィルタの実行順序について、正しい説明を選べ。
+
+1. 常にフィルタを作成した順で実行される。
+2. フィルタ内で実行順を定義する。
+3. フィルタのファイル名昇順で実行される。
+4. 設定クラスで実行順を定義する。
+
+正答：4
+解説：
+『Spring Framework』第11章/複数種類のフィルタを利用する方法
+
+フィルタの実行順序は、設定クラスで定義します。
+したがって、選択肢4が正解です。
