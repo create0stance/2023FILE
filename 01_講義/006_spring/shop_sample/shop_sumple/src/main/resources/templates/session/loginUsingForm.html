@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div>ログイン</div>
+<form th:action="@{/doLoginUsingForm}" method="post">
+	ユーザーID：
+	<input type="number" name="userId"><br>
+	パスワード：
+	<input type="password" name="password"><br>
+	<input type="submit" value="ログイン">
+</form>
+</body>
+</html>
