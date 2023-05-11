@@ -39,6 +39,27 @@ public class SeatsManager {
 
             seats.add(seat);
         }
+        int j= 0;
+        for(Seat seat:seats) {
+        	System.out.print(++j);
+        	System.out.print(":");
+        	String gender = "";
+        	String s = "空席";
+        	if(seat.isReserved()) {
+        		s = "予約済";
+        		if(seat.getUser().getGender() == 1) {
+        			gender = "男性";
+        		}
+        		if(seat.getUser().getGender() == 2) {
+        	
+        			gender = "女性";
+        		}
+        	}
+        	System.out.print(s);
+        	System.out.print(":");
+        	System.out.print(gender);
+        	System.out.print("|");
+        }
     }
 
     /**
