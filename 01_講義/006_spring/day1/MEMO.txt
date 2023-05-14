@@ -1,0 +1,30 @@
+shop
+Maven Project
+17
+jp.co.sss.shop
+shop
+jp.co.sss.shop
+
+
+2.7.5
+dev tools
+thymereaf
+springweb
+
+pom.xml
+<java.version>16</java.version>
+
+maven プロジェクトの更新
+
+
+application.properties
+
+server.servlet.context-path=/shop
+server.port=7777
+spring.thymeleaf.cache=false
+
+IndexController
+
+//	@ResponseBody
+
+@RequestMapping(value = {"/","/index","index.html"})
