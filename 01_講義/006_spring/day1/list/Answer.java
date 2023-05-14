@@ -1,7 +1,9 @@
 package review_obj.list;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Answer {
 	public static void main(String[] args) {
@@ -100,6 +102,7 @@ public class Answer {
 
 		// 友達リストを作成
 		List<Creature> creatures = new ArrayList<>();
+		
 		// 動物を全て友達リストに追加
 		for (Animal animal : animals) {
 			creatures.add(animal);
@@ -113,15 +116,41 @@ public class Answer {
 		for (Human human : humans) {
 			System.out.println(human.getName() + "さんの友達を紹介します。");
 			
+			// HumanクラスのfriendフィールドからArrayListを取得しループ
 			for (Creature friend : human.getFriend()) {
 				System.out.println(friend);
 				System.out.println("-----------------------------------------------");
 			}
 			
+			// friendリストが空の場合の処理
 			if (human.getFriend().size() < 1) {
 				System.out.println("友達はいません！");
 			}
 		}
+		
+		// 6)【応用】streamApiを使ってみよう！streamApiはよく使うから余裕があれば検索し、挑戦してみよう。
+		// humansリストから、名前が山本太郎のオブジェクトのみ抽出
+		String searchName = "山本太郎";
+		List<Human> filteredHumans = humans.stream().filter(human -> human.getName().equals(searchName)).collect(Collectors.toList());
+		
+		// 絞り込んだリストが空じゃない、かつ、1つ目の要素の友達リストが空じゃない場合の処理
+		if(filteredHumans.size() > 0 && filteredHumans.get(0).getFriend().size() > 0) {
+			// 山本さんの友達リストを取得
+			List<Creature> yamamotosFriends = filteredHumans.get(0).getFriend();
+			System.out.println("-----------------------------------------------");
+			System.out.println(searchName + "さんの友達で1番早いのは、以下の友達です！");
+			System.out.println("-----------------------------------------------");
+			// 6)山本さんの友達リストの中で、時速の数値が1番大きな生物を取得し、以下をコンソール出力せよ。
+			/*
+			 種別：チーター
+			 名前：黒ちゃん
+			 時速：110km
+			*/
+			// maxを使いrunSpeedが一番大きな生物を取得
+			Creature highSpeedFriend = yamamotosFriends.stream().max(Comparator.comparingInt(Creature::getRunSpeed)).get();
+			System.out.println(highSpeedFriend);
+		}
+		
 	}
 
 }
