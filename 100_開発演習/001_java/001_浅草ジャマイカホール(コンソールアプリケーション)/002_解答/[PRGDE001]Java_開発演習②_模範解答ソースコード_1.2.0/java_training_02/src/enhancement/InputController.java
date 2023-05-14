@@ -25,7 +25,6 @@ public class InputController {
 
         // 入力準備
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
         // 座席番号の入力処理
         String seatNumStr = br.readLine();
 

@@ -14,7 +14,7 @@ public class Constant {
 
     // ****メインクラス用メッセージ****
     /** システムスタート時のメッセージ */
-    public static final String START_MSG = "ようこそ浅草ジャマイカホールへ！\n";
+    public static final String START_MSG = "ようこそ浅草ジャマイカホールへ！";
 
     /** 満席だった時のメッセージ */
     public static final String NO_VACANT_MSG = "\n満席です。";
