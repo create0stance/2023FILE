@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<p th:text="${session.userId}"></p>
+<a th:href="@{/loginOnSession}">ログイン</a>
+<a th:href="@{/logout}">ログアウト</a>
+<h3>リンク一覧</h3>
+<h4>ページ遷移</h4>
+<ul>
+	<li><a th:href="@{/before}" target="_blank">リンク</li>
+	<li><a th:href="@{/transition}" target="_blank">フォワード</li>
+	<li><a th:href="@{/index_r}" target="_blank">リダイレクト</li>
+</ul>
+<h4>フォーム</h4>
+<ul>
+	<li><a th:href="@{/login}" target="_blank">GETでログイン</li>
+	<li><a th:href="@{/login}" target="_blank">POSTでログイン</li>
+	<li><a th:href="@{/loginUsingForm}" target="_blank">Formクラスを使う</li>
+</ul>
+<h4>スコープ</h4>
+<ul>
+	<li><a th:href="@{/loginOnRequest}" target="_blank">リクエストスコープ</li>
+	<li><a th:href="@{/login}" target="_blank">POSTでログイン</li>
+	<li><a th:href="@{/loginUsingForm}" target="_blank">Formクラスを使う</li>
+</ul>
+
+
+</body>
+</html>

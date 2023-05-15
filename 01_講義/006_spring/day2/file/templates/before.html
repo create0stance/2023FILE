@@ -1,0 +1,58 @@
+<!--
+	IndexControllerクラスに以下URLでアクセスした際に、before.htmlをビューとしてリターンするメソッドを追加せよ。
+	なお、メソッド名はbeforeとする。
+	URL：http://localhost:7777/shop/before
+	使用するビューのパス：before.html
+	※上記、ビューを作成し、以下のHTMLを記載する。
+-->
+絶対パス・相対パスまとめ
+絶対パス：「http://」から始まるURLを最初から最後まで完全に指定する方法
+相対パス：「ある場所から見てどこにリンクするか」を相対的に捉える指定方法
+
+フォワード：内部的にビューなどに処理を転送する
+リダイレクト：クライアントに対して、指定のURLに新たにリクエストを送るようにレスポンスを返す機能。
+
+name属性と引数の変数名が紐づく。
+GET:パラメーター名と値がURLに付与されリクエストされる
+POST:パラメーター名と値がリクエストメッセージボディに付与される。（URLには表示されない）
+
+Formクラスとは
+・Formから送信される値を保管する目的のBean。
+・Form部品のname属性の値（パラメータ名）と同じ名称のフィールドを持つ。
+・フィールドはprivateで作られ、命名規則に従ったsetter、getterメソッドを持つ。
+・コントローラーメソッドの引数に（型名 変数名)を記述することで、フォームから送られたパラメータ値がパラメータ名と同名のフィールドに代入(バインド)され、メソッド内で利用できる。
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>絶対パス</h2>
+<ul>
+<li><a href="http://localhost:7777/shop/before">http://localhost:7777/shop/before</a></li>
+<li><a href="http://localhost:7777/shop/">http://localhost:7777/shop/</a></li>
+</ul>
+<h2>相対パス</h2>
+<h3>現在地:http://localhost:7777/shop/before</h3>
+<ul>
+	<!--/* 「./」と「何も無し」は、どちらも今いる階層からの相対位置を意味するため同じ  */-->
+	<li><a href="login">login</a></li>
+	<li><a href="./login">./login</a></li>
+	<li><a href="item/list">item/list</a></li>
+	<!--/* 「../」で、一階層上を意味する  */-->
+	<li><a href="../login">../login</a></li>
+	<!--/* /から始める記載の仕方は、ドキュメントルートからの相対位置を指定する  */-->
+	<li><a href="/login">/login</a></li>
+	<li><a href="/shop/before">/shop/before</a></li>
+	<li><a href="/shop/">/shop/</a></li>
+	<!-- ?パラメータ名=値&パラメータ名=値の記載の場合、現在のURLにパラメーターが追加される　-->
+	<li><a href="?userId=111">?userId=111</a></li>
+	<!-- 他の記述の仕方とも合わせて利用可能 -->
+	<li><a href="/shop/before?userId=111">/shop/before?userId=111</a></li>
+</ul>
+<div>最初の画面</div>
+<a th:href=@{/after}>リンク</a>
+</body>
+</html>
