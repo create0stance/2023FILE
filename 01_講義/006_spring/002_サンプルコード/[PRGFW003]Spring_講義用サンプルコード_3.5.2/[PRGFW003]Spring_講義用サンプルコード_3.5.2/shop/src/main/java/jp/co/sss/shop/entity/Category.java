@@ -1,0 +1,31 @@
+//7章 外部参照関係にあるテーブルの検索 2．エンティティの作成
+package jp.co.sss.shop.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "categories")
+public class Category {
+    @Id
+    private Integer id;
+
+    @Column
+    private String name;
+
+    public Integer getId() {
+        return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+
