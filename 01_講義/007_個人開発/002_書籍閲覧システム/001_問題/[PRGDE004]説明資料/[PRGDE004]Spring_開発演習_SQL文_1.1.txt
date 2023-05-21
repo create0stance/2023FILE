@@ -1,0 +1,51 @@
+-- テーブル・シーケンス削除
+DROP TABLE book CASCADE CONSTRAINTS;
+DROP TABLE genre CASCADE CONSTRAINTS;
+DROP TABLE book_user CASCADE CONSTRAINTS;
+DROP SEQUENCE seq_book ;
+DROP SEQUENCE seq_genre;
+DROP SEQUENCE seq_book_user;
+
+-- ジャンル情報テーブルの作成
+CREATE TABLE genre (
+  genre_id NUMBER(2) PRIMARY KEY,
+  genre_name VARCHAR2(30 CHAR) NOT NULL
+);
+
+-- 書籍情報テーブルの作成
+CREATE TABLE book (
+  book_id NUMBER(5) PRIMARY KEY,
+  book_name VARCHAR2(60 CHAR) NOT NULL,
+  author VARCHAR2(30 CHAR) NOT NULL,
+  publication_date DATE NOT NULL,
+  stock NUMBER(4) NOT NULL,
+  genre_id NUMBER(2) NOT NULL REFERENCES genre(genre_id)
+);
+
+CREATE SEQUENCE seq_genre NOCACHE; 
+CREATE SEQUENCE seq_book NOCACHE; 
+CREATE SEQUENCE seq_book_user NOCACHE; 
+
+-- ユーザ情報テーブルの作成
+CREATE TABLE book_user  (
+  book_user_id NUMBER(5) PRIMARY KEY,
+  book_user_name VARCHAR2(30 CHAR) NOT NULL,
+  password VARCHAR2(16 CHAR) NOT NULL
+);
+
+
+-- ジャンル情報テーブルへのレコード登録
+INSERT INTO genre VALUES(seq_genre.NEXTVAL, '文学');
+INSERT INTO genre VALUES(seq_genre.NEXTVAL, '経済');
+INSERT INTO genre VALUES(seq_genre.NEXTVAL, '技術');
+
+-- 書籍情報テーブルへのレコード登録
+INSERT INTO book VALUES(seq_book.NEXTVAL, 'よくわかる経済', '山田健介', '2010/11/3', 10, 2);
+INSERT INTO book VALUES(seq_book.NEXTVAL, '日本文学傑作選', '大原洋子', '1998/3/5',  3, 1);
+INSERT INTO book VALUES(seq_book.NEXTVAL, '日本経済史2016', '宮本良太', '2016/7/20', 23, 2);
+
+-- ユーザ情報テーブルへのレコード登録
+INSERT INTO book_user VALUES(seq_book_user.NEXTVAL, '鈴木太郎', 1111);
+INSERT INTO book_user VALUES(seq_book_user.NEXTVAL, '渡辺花子', 2222);
+
+COMMIT;

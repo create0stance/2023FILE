@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout-header(header)">
+
+<head>
+
+
+</head>
+
+<body>
+	<header>
+		<div>
+			<h1>社員管理システム</h1>
+		</div>
+		<div>
+			<a th:href="@{index}">社員一覧</a>
+		</div>
+		<div>
+			<a th:href="@{new}">新規社員登録</a>
+		</div>
+		<hr>
+	</header>
+</body>
+
+
+</html>

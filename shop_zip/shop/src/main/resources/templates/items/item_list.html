@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+
+<body>
+	<div>商品一覧</div>
+	<table>
+		<tr>
+			<th>商品番号</th>
+			<th>商品名</th>
+			<th>価格</th>
+		</tr>
+		<!--/* 
+		【th:each】
+		thymereafでの繰り返し式。
+		拡張for文と同じような仕組み。
+		th:each="listの中身を1つずつ格納する変数名：リスト"
+		 */-->
+		<tr th:each="item: ${items}">
+			<!-- each文の中の処理が繰り返される -->
+			<td th:text="${item.id}"></td>
+			<td th:text="${item.name}"></td>
+			<td th:text="${item.price}"></td>
+		</tr>
+	</table>
+	<a th:href="@{/items/create/complete}">商品登録</a><br>
+	<a th:href="@{/items/create/input}">商品登録フォーム</a>
+</body>
+</html>

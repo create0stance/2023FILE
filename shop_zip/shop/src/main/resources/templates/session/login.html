@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div>ログイン</div>
+<!--/*
+th:action="@{/doLogin}"
+→action="/shop/doLogin"に書き換えられる
+*/-->
+
+<form th:action="@{/doLogin}" method="get">
+	<!--/*
+	ユーザーID：
+	name属性：パラメータ名
+	入力値(value値)：パラメータ値
+	*/-->
+	<input type="number" name="userId"><br>
+	パスワード：
+	<input type="password" name="password"><br>
+	<input type="submit" value="GETによるログイン">
+</form>
+<!--/*
+<form th:action="@{/doLogin}" method="post">
+	ユーザーID：
+	<input type="number" name="userId"><br>
+	パスワード：
+	<input type="password" name="password"><br>
+	<input type="submit" value="POSTによるログイン">
+</form>
+*/-->
+</body>
+</html>

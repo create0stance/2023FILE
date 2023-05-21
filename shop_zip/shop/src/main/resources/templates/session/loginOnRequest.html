@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+
+<body>
+	<div>ログイン</div>
+	<!--/*
+	${変数名}<=変数式
+	スコープに保存されている変数名を記載することで、値を取得できる。
+	*/-->
+	<span>↓ここにuserIdを表示する</span>
+	<div th:text="${userId}"></div>
+	<span>----------------------</span>
+	<form method="post" th:action="@{/doLoginOnRequest}">
+		ユーザ ID:<input type="number" name="userId" />
+		パスワード:<input type="password" name="password" />
+		<input type="submit" value="ログイン" />
+	</form>
+</body>
+
+</html>

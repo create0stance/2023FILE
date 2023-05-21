@@ -1,11 +1,11 @@
 -- ジャンル情報テーブルの作成
-CREATE TABLE genre (
+CREATE TABLE  IF NOT EXISTS genre (
   genre_id NUMBER(2) PRIMARY KEY,
   genre_name VARCHAR(30 CHARACTERS) NOT NULL
 );
 
 -- 書籍情報テーブルの作成
-CREATE TABLE book (
+CREATE TABLE IF NOT EXISTS book (
   book_id NUMBER(5) PRIMARY KEY,
   book_name VARCHAR(60 CHARACTERS) NOT NULL,
   author VARCHAR(30 CHARACTERS) NOT NULL,
@@ -15,8 +15,12 @@ CREATE TABLE book (
 );
 
 -- ユーザ情報テーブルの作成
-CREATE TABLE book_user  (
+CREATE TABLE IF NOT EXISTS book_user  (
   book_user_id NUMBER(5) PRIMARY KEY,
   book_user_name VARCHAR(30 CHARACTERS) NOT NULL,
   password VARCHAR(16 CHARACTERS) NOT NULL
 );
+
+CREATE SEQUENCE IF NOT EXISTS seq_genre NOCACHE; 
+CREATE SEQUENCE IF NOT EXISTS seq_book NOCACHE; 
+CREATE SEQUENCE IF NOT EXISTS seq_book_user NOCACHE; 

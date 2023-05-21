@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	th:replace="~{lesson07_05/layout :: layout(head, header, footer)}">
+
+<head>
+
+
+</head>
+
+<body>
+
+	<div layout:fragment="main">
+			<form method="get" th:action="@{/lesson07_05/index}">
+				社員名:<input type="text" name="name">
+				<input type="submit" value="登録">
+			</form>
+	</div>
+
+</body>
+
+<script th:src="@{/js/common.js}"></script>
+
+</html>

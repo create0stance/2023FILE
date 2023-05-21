@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	th:fragment="layout(main)">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link th:href="@{/css/style.css}" rel="stylesheet">
+
+
+</head>
+
+<body>
+	<header th:replace="~{/lesson07_05/header :: layout-header(header)}"></header>
+	<main th:replace=${main}>
+	<div layout:fragment="main" th:remove="tag"></div>
+	</main>
+	<footer th:replace="~{/lesson07_05/footer :: layout-footer(footer)}"></footer>
+
+</body>
+
+
+</html>

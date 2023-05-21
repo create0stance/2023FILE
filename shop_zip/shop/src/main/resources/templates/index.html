@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div>TOPページ</div>
+<p th:text="${session.userId}"></p>
+<a th:href="@{/loginOnSession}">ログイン</a>
+<a th:href="@{/logout}">ログアウト</a>
+<h3>MENU</h3>
+<ul>
+<li><a th:href="@{/items/findAll}">全件検索</a></li>
+</ul>
+</body>
+</html>

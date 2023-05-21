@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<!-- f c e b d-->
+<h2>絶対パス</h2>
+<ul>
+	<li><a href="http://localhost:7777/shop/before">
+	http://localhost:7777/shop/before</a></li>
+	<li><a href="http://localhost:7777/shop/">
+	http://localhost:7777/shop/</a></li>
+</ul>
+<h2>相対パス</h2>
+<h3>現在地:http://localhost:7777/shop/before</h3>
+<ul>
+	<li><a th:href="@{/before}">/shop/before</a></li>
+	<li><a th:href="@{/}">/shop/</a></li>
+	<li><a th:href="@{/before?userId=111}">/shop/before?userId=111</a></li>
+</ul>
+<div>最初の画面</div>
+<a th:href=@{/after}>リンク</a>
+</body>
+</html>

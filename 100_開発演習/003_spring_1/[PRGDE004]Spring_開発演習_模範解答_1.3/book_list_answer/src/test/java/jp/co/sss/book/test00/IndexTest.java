@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,6 +18,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import com.google.common.io.Files;
 
@@ -33,7 +34,10 @@ public class IndexTest {
 	@BeforeEach
 	public void createDriver() {
 		System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
-		webDriver = new ChromeDriver();
+		ChromeOptions ops = new ChromeOptions();
+		ops.addArguments("--remote-allow-origins=*");
+		webDriver = new ChromeDriver(ops);
+	
 	}
 	/**
 	 * テストメソッドが実行された後に実行されるメソッド
@@ -50,7 +54,7 @@ public class IndexTest {
 		// 指定したURLに遷移する
 		webDriver.get("http://localhost:3333/book_list/");
 		// 最大5秒間待つ
-		webDriver.manage().timeouts().pageLoadTimeout(5,TimeUnit.SECONDS);
+		webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(5));
 		// スクリーンショット
 		File tempFile = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
 		try {

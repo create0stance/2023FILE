@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+
+<body style="padding:30px;">
+	<div>商品詳細</div>
+	<p th:text="${message}"></p>
+	<table class="table table-bordered" style="width:80%;">
+		<tr>
+			<td>商品番号</td>
+			<td th:text="${item.id}"></td>
+		</tr>
+		<tr>
+			<td>商品名</td>
+			<td th:text="${item.name}"></td>
+		</tr>
+		<tr>
+			<td>価格</td>
+			<td th:text="${item.price}"></td>
+		</tr>
+		<tr>
+			<td>カテゴリ</td>
+			<td th:text="${item.categoryName}"></td>
+		</tr>
+		<tr>
+			<td>説明</td>
+			<td th:text="${item.description}"></td>
+		</tr>
+		<tr>
+			<td>在庫数</td>
+			<td>[[${item.stock}]]個</td>
+		</tr>
+		<tr>
+			<td>登録日時</td>
+			<td>[[${item.date}]]</td>
+		</tr>
+		
+	</table>
+</body>
+
+</html>

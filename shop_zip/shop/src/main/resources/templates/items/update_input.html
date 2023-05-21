@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+
+<body>
+
+	<div>商品の編集</div>
+	<form method="post" 
+		th:action="@{/items/update/complete/}+${item.id}">
+		<!-- /shop/items/update/complete/更新対象の商品id -->
+		商品名:
+		<!-- 初期値に商品名をセット -->
+		<input type="text" name="name" th:value="${item.name}" />
+		価格:
+		<!-- 初期値に価格をセット -->		
+		<input type="number" name="price" th:value="${item.price}" />
+		
+		<!-- 更新ボタン -->
+		<input type="submit" value="更新する" />
+	</form>
+
+</body>
+
+</html>
