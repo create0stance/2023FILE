@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!-- 
+このページのtitleタグと
+bodyタグ内の要素をlayout.htmlに渡す。
+:: layout(~{::title},~{::body/content()})
+↓
+HTMLタグ全体をth:fragment=layout(title,body)と置き換える
+th:replace="~{common/layout}
+-->
+<html xmlns:th="http://www.thymeleaf.org" 
+	th:replace="~{common/layout :: layout(~{::title},~{::body/content()})}"
+	>
+
+<head>
+<!--/*
+	■呼び出し元の要素で置き換えないlayout
+	th:replace="~{common/layout_0}"
+	■mainタグの要素に置き換える
+	th:replace="~{common/layout :: layout(~{::title},~{::main})}"
+	■id="subContent"内の要素に置き換え
+	th:replace="~{common/layout :: layout(~{::title},~{::#subContent/content()})}"	
+	
+*/-->
+	<meta charset="UTF-8">
+	<title>Layout View</title>
+</head>
+
+<body>
+	<main id="main">layout.htmlの本文</main>
+	<main id="subContent">
+		<h2>Hello!!</h2>
+		<p>これはサブコンテンツです。</p>
+	</main>
+</body>
+
+</html>

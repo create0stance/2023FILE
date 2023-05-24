@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout(title,body)">
+
+<head>
+	<meta charset="UTF-8">
+	<link th:href="@{/css/layout.css}" rel="stylesheet" />
+	<!-- 呼び出し元のtitleタグに置き換え-->
+	<title th:replace="${title}">Insert title here</title>
+</head>
+
+<body>
+	<!-- headerに置き換え -->
+	<header th:replace="~{common/header :: layout-header}"></header>
+	<article id="container">
+		<!-- footerに置き換え -->
+		<aside th:replace="~{common/sidebar :: layout-sidebar}"></aside>
+		<!-- 呼び出し元の指定要素に置き換え-->
+		<main id="main" th:replace="${body}">
+		</main>
+	</article>
+	<!-- footerに置き換え -->
+	<footer th:replace="~{common/footer :: layout-footer}"></footer>
+</body>
+
+</html>
