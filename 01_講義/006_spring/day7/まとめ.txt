@@ -1,70 +1,25 @@
-①開発プロセス
-②テスト技法
-③設計書
-④説明資料
+スタブ
+時間通りにアラームモジュールを呼び出せるかというテストの際、
+その動作を確認するためだけに、
+鳴らないアラームモジュールを用意するイメージ
 
-ValidationMessages.properties
-messages.properties
-util.LoginValidator.java
-util.Login.java
-form.LoginFormWithAnnotation.java
-controller.SessionController.java
-/templates/session/loginWithAnnotation.html
+ドライバ
+テスト対象のモジュールがスマートフォンのアラームであれば、
+アラームを呼び出す部分だけを持つ、
+ダミーのスマートフォンを用意する
 
-filter内のjava
-config.FilterConfig.java
-filter.LoginCheckFilter.java
-cssファイルと/loginWithValidation.html
-
-■メッセージリソースまとめ
-ValidationMessages.propertiesやmessages.propertiesなどメッセージを管理するファイルを
-メッセージリソースという。
-
-■メッセージリソースの記述について
-・記述形式：[キー] = [値]
-・プレースホルダーを用いて文字列の埋め込みを記述できる
-
-■ValidationMessages.propertiesとmessages.propertiesの違い
-①ValidationMessages.properties
-・Validatorの機能に関するメッセージを管理
-例：「桁数」「パターン」「文字数」「未入力」チェックなどのエラーメッセージ
-
-②messages.properties
-・フィールドの形式チェックを含む汎用的なメッセージを管理
-
-POINT：メッセージの種類に応じて、管理するメッセージリソースを選択することが大事。
-
-■汎用メッセージのビュー内での利用
-messages.propertiesに[キー] = [値]と記載したメッセージは
-ビュー内で以下の形式で使用できる
-#{キー}
+予算
+使える補助金の検討、
+目的の明確化：来訪者数、売上金額、WEBサイトへのアクセス数
+現状の把握：平日何人程度？土曜何人程度
+協力してくれる商店街のお店は？
+どんな協力をしてくれそう？
+集客の方法は？
+どんな魅力がある？
+予算感：
+スケジュール感：
 
 
-■フィルタとは
-コントローラーの処理実行前に行われる共通処理。
-@Componetや@Beanを利用しFiletrインターフェイスの実装クラスをDIコンテナに登録することで
-Fileterが実行される
-
-@Componet
-汎用的なプログラムをDI登録する際のアノテーション。
-★クラスに付与できる。
-
-@Bean
-メソッドの返り値をDI登録する際のアノテーション。
-主に設定クラスのメソッドに付与し利用する。
-
-■フィルターの実行順序の指定
-設定クラスで実行順を定義することで、実行順序を指定できる！
-
-■Thymeleafとは
-テンプレートエンジンと呼ばれるjavaのライブラリ。
-テンプレート(ビュー)内には「属性」と「式」を記述でき、
-記載された構文がレンダリングされHTMLが出力される。
 
 
-■Thymeleafの基本的な記述式
-${変数名}:リクエストスコープに保存されたデータの利用
-${session.変数名}:セッションスコープに保存されているデータの利用
-th:each ：繰り返し処理
-@{パス}：リンク式
-自動的にURLエンコーディングされたパラメータを持つURLを生成
+
