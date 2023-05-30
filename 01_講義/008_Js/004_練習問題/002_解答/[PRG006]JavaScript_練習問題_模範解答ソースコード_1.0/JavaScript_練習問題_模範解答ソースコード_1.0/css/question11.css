@@ -1,0 +1,10 @@
+@CHARSET "UTF-8";
+
+div.calc {
+  height: 100px;
+  width: 140px;
+  margin: 10px;
+  background-color: #48d1cc;
+  text-align: center;
+  line-height: 100px;
+}

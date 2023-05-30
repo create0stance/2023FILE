@@ -1,0 +1,30 @@
+■DOM操作
+1.
+DOMツリーにおける要素に関する説明として誤っているものはどれか。
+
+1. DOMツリーの各要素はDocumentオブジェクトから階層的にアクセスできる。
+2. DOMツリーの各要素は「ノード」と呼ばれる。
+3. head要素はDOMツリーの要素として扱われない。
+4. 属性の値やタグに囲まれたテキスト情報も、各要素が持つ情報として扱われる。
+
+正答：3
+解説：
+『13.DOM操作/1.概要』
+DOMツリーの要素は、html要素以下の要素全てが対象となります。そのため、head要素もDOMツリーの要素として扱われます。
+したがって、選択肢3が正解です。
+
+■DOM操作
+2.
+<p id="paragraph1">の「id属性」を指定して、要素を取得するものはものはどれか。
+
+1. document.getElementById('paragraph1');
+2. document.getElementById(#paragraph1);
+3. document.getElementById(paragraph1);
+4. document.getElementById(p id="paragraph1");
+
+正答：1
+解説：
+『13.DOM操作/2.利用方法/要素の取得』
+Documentオブジェクトのメソッドである「getElementById(id)」を利用します。idは、シングルクォーテーションで囲みます。
+したがって、選択肢1が正解です。
+

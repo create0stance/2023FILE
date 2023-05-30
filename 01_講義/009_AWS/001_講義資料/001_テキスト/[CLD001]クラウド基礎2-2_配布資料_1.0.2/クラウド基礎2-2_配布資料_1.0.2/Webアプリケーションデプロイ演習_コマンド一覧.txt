@@ -1,0 +1,45 @@
+【RDSへの接続】
+1. アップデートを適用
+sudo yum update
+
+2. JAVAをインストール
+sudo yum install java-1.8.0-openjdk.x86_64
+
+3. JAVAの切り替え
+sudo alternatives --config java
+
+4. JAVAバージョンを確認
+java -version
+
+5. oracleへの接続に必要なソフトウェアのインストール①
+sudo rpm -Uvh oracle-instantclient19.3-basic-19.3.0.0.0-1.x86_64.rpm
+
+6. oracleへの接続に必要なソフトウェアのインストール②
+sudo rpm -Uvh oracle-instantclient19.3-sqlplus-19.3.0.0.0-1.x86_64.rpm
+
+7. パスを通す
+export LD_LIBRARY_PATH=/usr/lib/oracle/12.2/client64/lib
+
+8. RDSに接続
+sqlplus64
+
+9. データベースのユーザ名入力（[]の部分を書き換えて、入力してください）
+oracleadmin@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=[RDSのエンドポイント])(PORT=1521))(CONNECT_DATA=(SID=[最初のデータベース名])))
+
+※「最初のデータベース名」の内容は、「⑤RDSと踏み台用EC2を作成-3」のページ中の「追加設定」で入力した内容です。
+
+10. パスワード（ユーザadminに対して設定したパスワードを入力してください）
+
+
+【Windowsコマンドプロンプト上でのjarファイルの差し替え】
+1. 階層を移動
+cd [sample.jarを保存した場所]
+
+2. ファイルの入れ替えを行う
+jar -uvf sample.jar -C sample BOOT-INF/classes/application.properties
+
+
+【アプリケーションの実行】
+java -jar sample.jar
+
+
