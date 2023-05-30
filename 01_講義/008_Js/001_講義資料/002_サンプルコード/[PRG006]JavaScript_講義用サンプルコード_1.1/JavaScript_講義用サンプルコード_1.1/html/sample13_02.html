@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Sample13_02</title>
+</head>
+<body>
+  <p id="dom" onclick="replaceText()">元のテキスト</p>
+  <script>
+    function replaceText() {
+      var element = document.getElementById('dom'); // id属性の値が"dom"である要素を取得
+      element.textContent = '置換後のテキスト'; // タグに囲まれたテキストを引数textの値に変更
+    }
+  </script>
+</body>
+</html>

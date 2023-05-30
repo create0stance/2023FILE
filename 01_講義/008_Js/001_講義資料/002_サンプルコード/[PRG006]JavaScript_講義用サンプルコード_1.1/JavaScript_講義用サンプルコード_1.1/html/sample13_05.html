@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Sample13_05</title>
+</head>
+<body>
+  <a id="link" href="http://www.google.co.jp/">Google</a>
+  <input type="button" value="クリック" onclick="changeLinkTarget()" />
+  <script>
+    function changeLinkTarget() {
+      var link = document.getElementById('link');
+      link.setAttribute('href', 'http://www.yahoo.co.jp/'); // href属性の値を変更
+    }
+  </script>
+</body>
+</html>
