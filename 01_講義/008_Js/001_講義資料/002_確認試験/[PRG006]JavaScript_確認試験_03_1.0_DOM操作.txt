@@ -1,3 +1,18 @@
+■DOM（ドキュメントオブジェクトモデル）
+・HTMLタグの階層構造をツリー形式で表現したもの。
+html->head->title
+	->body->section->h1
+	->body->header->ul
+・DOMツリーの各要素には階層的にアクセス出来る。
+・DOMツリーの各要素はノード。
+・属性値やタグに囲まれたテキストなども、要素の保持する情報として扱うことが出来る。
+
+■ノード取得
+document.getElementById('ID名')・・・ID指定で要素を取得
+document.getElementsByTagName('タグ名')・・・タグで指定した要素を配列で取得
+document.getElementsByName('name属性の値')・・・name属性で指定した要素を配列で取得
+など
+
 ■DOM操作
 1.
 DOMツリーにおける要素に関する説明として誤っているものはどれか。
