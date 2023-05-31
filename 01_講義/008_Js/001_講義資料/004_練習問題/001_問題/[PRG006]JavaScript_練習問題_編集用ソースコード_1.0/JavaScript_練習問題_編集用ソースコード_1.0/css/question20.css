@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+
+div {
+  height: 100px;
+  width: 140px;
+  margin: 10px;
+  text-align: center;
+  line-height: 100px;
+}
+
+div.sample {
+  background-color: #ff0000;
+}
+
+div.change {
+  background-color: #0000ff;
+}
