@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Sample13_03</title>
+</head>
+<body>
+  <script>
+    function getInput() {
+      var textBox = document.getElementById('empId'); // id属性の値が"empId"である要素を取得
+      var empId = textBox.value; // テキストボックスの入力値を取得
+      alert(empId);
+    }
+  </script>
+  <form name="form">
+    社員ID<input type="text" name=”empId” id="empId" />
+    <input type="button" value="Click!" onclick="getInput();" />
+  </form>
+</body>
+</html>
