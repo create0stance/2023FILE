@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{common/2021/layout_inner :: layout(
+	title=~{::title/content()},
+	body=~{::body/content()}
+)}">
+<head>
+<title>会員詳細</title>
+<meta charset="UTF-8" />
+</head>
+<body class="user index">
+	<h2 class="title">会員詳細</h2>
+	<th:block th:object="${user}">
+		<th:block th:replace="~{user/common/detail :: content}"></th:block>
+	</th:block>
+
+	<div class="detail_button_area">
+		<a class="mr-2 btn btn-secondary btn-lg" th:href="@{/}">戻る</a>
+		<form method="post" class="d-inline" th:action="@{${URL.USER_UPDATE_URL_INPUT}}">
+			<button type="submit" class="btn btn-primary btn-lg mr-2">変更</button>
+		</form>
+		<form method="post" class="d-inline" th:action="@{${URL.USER_DELETE_URL_CHECK}}">
+			<button type="submit" class="btn btn-danger btn-lg">退会</button>
+		</form>
+	</div>
+
+</body>
+</html>

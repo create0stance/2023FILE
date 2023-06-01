@@ -20,8 +20,8 @@ import jp.co.sss.shop.validator.EmailValidator;
  * アノテーション付与対象
  */
 @Target({ java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.ANNOTATION_TYPE,
-		java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD,
-		java.lang.annotation.ElementType.PARAMETER })
+        java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD,
+        java.lang.annotation.ElementType.PARAMETER })
 
 /**
  * アノテーション情報の維持範囲
@@ -34,34 +34,14 @@ import jp.co.sss.shop.validator.EmailValidator;
  */
 @Constraint(validatedBy = { EmailValidator.class })
 public @interface EmailCheck {
-	/**
-	 * 入力チェックNGの場合のメッセージを設定
-	 * @return 表示メッセージ
-	 */
-	String message() default "{userRegist.duplicate.message}";
+	String message() default "{userRegist.duplicate.message}";;
 
-	/**
-	 * 特定のバリデーショングループを設定(設定なし)
-	 * @return バリデーショングループのクラスリスト
-	 */
 	Class<?>[] groups() default {};
 
-	/**
-	 * 検証対象データに対する属性や関連する情報を定義  (処理定義なし)
-	 * @return 対象となるオブジェクトのペイロード
-	 */
 	Class<? extends Payload>[] payload() default {};
 
-	/**
-	 * メールアドレスの取得
-	 * @return メールアドレス
-	 */
 	String fieldEmail() default "email";
 
-	/**
-	 * ユーザIDの取得
-	 * @return ユーザID
-	 */
 	String fieldId() default "id";
 
 }

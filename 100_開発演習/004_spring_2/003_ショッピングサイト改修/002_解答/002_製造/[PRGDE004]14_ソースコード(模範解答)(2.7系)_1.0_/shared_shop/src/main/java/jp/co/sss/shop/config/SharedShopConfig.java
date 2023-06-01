@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -34,8 +33,6 @@ public class SharedShopConfig implements WebMvcConfigurer {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
-		//画像ファイルの保存場所と、パス名をつなげる設定
-		registry.addResourceHandler("/images/**").addResourceLocations("file:images/");
 	}
 
 	/**
@@ -47,7 +44,7 @@ public class SharedShopConfig implements WebMvcConfigurer {
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
 		PageableHandlerMethodArgumentResolver resolver = new PageableHandlerMethodArgumentResolver();
 		// ページ単位に表示する件数
-		resolver.setFallbackPageable(PageRequest.of(0, 10));
+		resolver.setFallbackPageable(PageRequest.of(0, 9));
 		argumentResolvers.add(resolver);
 	}
 
@@ -66,10 +63,5 @@ public class SharedShopConfig implements WebMvcConfigurer {
 				sessionCookieConfig.setHttpOnly(true);
 			}
 		};
-	}
-
-	@Override
-	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-		configurer.enable(); // デフォルトサーブレットへの転送機能を有効化
 	}
 }

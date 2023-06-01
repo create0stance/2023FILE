@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{common/layout_5block :: layout(~{::body/content()})}">
+<body>
+	<div class="user order_payment_input">
+		<h2 class="title">お支払い方法選択</h2>
+		<div class="user_info_form_area">
+			<form method="post" th:action="@{${URL.ORDER_CHECK}}">
+				<ul class="payment_method_select">
+					<li><label class="radio_label"> <input type="radio"
+							name="payMethod" value="1" th:checked="${paymentForm.payMethod == null || paymentForm.payMethod == 1}" /> クレジットカード
+					</label></li>
+					<li><label class="radio_label"> <input type="radio"
+							name="payMethod" value="2" th:checked="${paymentForm.payMethod == 2}" /> 銀行振り込み
+					</label></li>
+					<li><label class="radio_label"> <input type="radio"
+							name="payMethod" value="3" th:checked="${paymentForm.payMethod == 3}"/> 着払い
+					</label></li>
+					<li><label class="radio_label"> <input type="radio"
+							name="payMethod" value="4" th:checked="${paymentForm.payMethod == 4}"/> 電子マネー
+					</label></li>
+					<li><label class="radio_label"> <input type="radio"
+							name="payMethod" value="5" th:checked="${paymentForm.payMethod == 5}"/> コンビニ決済
+					</label></li>
+				</ul>
+				<!-- 				<span th:if="${#fields.hasErrors('payMethod')}" th:errors="*{payMethod}"></span> -->
+				<input type="submit" class="send_button" value="次へ" />
+			</form>
+			<form method="post" th:action="@{${URL.ADDRESS_INPUT}}" class="update">
+				<input type="hidden" name="backflg" value="true" />
+				<input type="submit" class="back_button" value="戻る" />
+			</form>
+		</div>
+	</div>
+</body>
+</html>

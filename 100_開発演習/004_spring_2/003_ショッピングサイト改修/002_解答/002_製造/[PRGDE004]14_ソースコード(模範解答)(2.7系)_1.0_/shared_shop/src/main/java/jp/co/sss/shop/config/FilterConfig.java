@@ -2,11 +2,10 @@ package jp.co.sss.shop.config;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import jp.co.sss.shop.filter.AdminAccountCheckFilter;
 import jp.co.sss.shop.filter.CategoryListMakeFilter;
-import jp.co.sss.shop.filter.ClientAccountCheckFilter;
+import jp.co.sss.shop.filter.CustomerAccountCheckFilter;
 import jp.co.sss.shop.filter.LoginCheckFilter;
 import jp.co.sss.shop.filter.SystemAdminAccountCheckFilter;
 
@@ -15,7 +14,7 @@ import jp.co.sss.shop.filter.SystemAdminAccountCheckFilter;
  *
  * @author SystemShared
  */
-@Configuration
+//@Configuration
 public class FilterConfig {
 	/**
 	 * 非会員向けアクセス制限用フィルタの設定
@@ -37,10 +36,10 @@ public class FilterConfig {
 	 * @return フィルタ設定情報
 	 */
 	@Bean
-	public FilterRegistrationBean<ClientAccountCheckFilter> configClientAccountCheckFilter() {
-		FilterRegistrationBean<ClientAccountCheckFilter> bean = new FilterRegistrationBean<ClientAccountCheckFilter>();
+	public FilterRegistrationBean<CustomerAccountCheckFilter> configCustomerAccountCheckFilter() {
+		FilterRegistrationBean<CustomerAccountCheckFilter> bean = new FilterRegistrationBean<CustomerAccountCheckFilter>();
 
-		bean.setFilter(new ClientAccountCheckFilter());
+		bean.setFilter(new CustomerAccountCheckFilter());
 		bean.setOrder(2);
 		return bean;
 	}

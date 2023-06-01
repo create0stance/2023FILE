@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{common/2021/layout_inner :: layout(
+	title=~{::title/content()},
+	body=~{::body/content()}
+)}">
+<head>
+<meta charset="UTF-8" />
+<title>会員登録確認</title>
+</head>
+<body class="user index" >
+<th:block th:object="${userForm}">
+	<h2 class="title mb-3">会員登録確認</h2>
+	<p class="alert alert-info">以下の内容で登録します。</p>
+	<th:block th:replace="~{user/common/check_detail :: detal-html}"></th:block>
+	<form method="post" th:action="@{${URL.USER_REGIST_URL_COMPLETE}}" class="d-inline">
+		<th:block th:replace="~{user/common/hiddens :: content}"></th:block>
+		<button type="submit" class="btn btn-primary float-left btn-lg mr-2	">登録</button>
+	</form>
+	<form th:action="@{${URL.USER_REGIST_URL_INPUT}}" method="post" class="">
+		<th:block th:replace="~{user/common/hiddens :: content}"></th:block><button type="submit" class="btn btn-secondary btn-lg float-left">戻る</button>
+	</form>
+</th:block>
+</body>
+</html>

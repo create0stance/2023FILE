@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{common/2021/layout_inner :: layout(
+	title=~{::title/content()},
+	body=~{::body/content()}
+)}">
+<head>
+<meta charset="utf-8">
+<title>商品詳細</title>
+</head>
+<body>
+	<div th:if="${item.image != null}" class="mb-3 owl-carousel portfolio-details-carousel">
+		<img th:src="@{/img/{image}(image=${item.image})}" class="img-fluid" alt="" />
+	</div>
+	<div th:if="${item.image == null}" class="mb-3 owl-carousel portfolio-details-carousel">
+		<img th:src="@{/img/common/no_image.jpg}" class="img-fluid" alt="" />
+	</div>
+
+	<div class="portfolio-info">
+		<h3>information</h3>
+		<ul>
+			<li><strong>商品名</strong>: <th:block th:text="${item.name}"></th:block></li>
+			<li><strong>価格</strong>: <th:block th:text="${item.price}"></th:block></li>
+			<li><strong>在庫</strong>: <th:block th:text="${item.stock}"></th:block></li>
+			<li><strong>カテゴリ</strong>: <th:block th:text="${item.category.name}"></th:block></li>
+		</ul>
+		<form method="post" class="user_info_form mt-3" th:action="@{${URL.BASKET_ADD}}">
+			<input type="hidden" name="id" th:value="${item.id}" />
+			<button type="submit" class="btn btn-primary btn-block">
+				<i class="fas fa-shopping-cart"></i>&nbsp;&nbsp;買い物かごに入れる
+			</button>
+		</form>
+		<form th:action="@{${URL.ITEM_LIST_DEFAULT}}" class="mt-3">
+			<button type="submit" class="back_button btn btn-secondary btn-block">
+				<i class="far fa-list-alt"></i>&nbsp;&nbsp;戻る
+			</button>
+		</form>
+	</div>
+	<h2 th:text="${item.name}"></h2>
+	<p>Item description</p>
+	<p th:text="${item.description}"></p>
+
+</body>
+
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{common/2021/layout_inner :: layout(
+	title=~{::title/content()},
+	body=~{::body/content()}
+)}">
+<head>
+<meta charset="utf-8">
+<title>会員新規登録</title>
+</head>
+<body>
+<body class="user index">
+	<h2 class="title mb-5">会員新規登録</h2>
+	<div class="user_info_form_area"  th:object="${userForm}">
+		<form method="post" th:action="@{${URL.USER_REGIST_URL_CHECK}}" class="d-inline">
+			<th:block th:replace="~{user/common/input :: input-html}"></th:block>
+			<input type="hidden" th:field="*{authority}" />
+			<button type="submit" class="btn btn-primary btn-lg float-left">確認</button>
+		</form>
+		<form th:action="@{${URL.LOGIN}}" class="ml-2 float-left">
+			<button type="submit" class="btn btn-secondary btn-lg">戻る</button>
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{common/2021/layout_inner :: layout(
+	title=~{::title/content()},
+	body=~{::body/content()}
+)}">
+<head>
+<title>会員削除完了</title>
+<meta charset="UTF-8" />
+</head>
+<body class="user index">
+	<h2 class="title">会員削除完了</h2>
+	<p class="alert alert-info">会員情報の削除が完了しました。</p>
+	<div class="text-right">
+		<a th:href="@{/}" class="btn btn-secondary">トップへ戻る</a>
+	</div>
+
+</body>
+</html>

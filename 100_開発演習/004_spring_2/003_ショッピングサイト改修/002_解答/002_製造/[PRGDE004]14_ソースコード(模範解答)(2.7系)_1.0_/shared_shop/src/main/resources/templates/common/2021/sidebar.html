@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+</head>
+<body>
+<div class="col-md-3 side-bar" th:fragment="sidebar">
+	<div class="content">
+		<div class="content-title"><p>カテゴリ別検索</p></div>
+		<!--/* 商品一覧画面以外で表示 */-->
+		<th:block th:if="${sortType == null}">
+		<form th:action="@{/item/list/category/1}" class="m-auto">
+		</th:block>
+		<!--/* 商品一覧画面上で表示 */-->
+		<th:block th:if="${sortType != null}">
+		<form th:action="@{/item/list/category/} + ${sortType}" class="m-auto">
+		</th:block>
+			<div class="form-group">
+				<div class="input-group">
+					<select name="categoryId" class="form-control form-control">
+						<option th:each="category: ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+					</select>
+				</div>
+			</div>
+			<button class="btn btn-block btn-sm btn-primary" type="submit" name="">
+				<i class="fas fa-search mb-2"></i>&nbsp;&nbsp;検索
+			</button>
+		</form>
+	</div>
+	<div class="content" th:if="${session.user != null and session.user.authority != 2}">
+		<div class="content-title"><p>メニュー</p></div>
+		<ul class="menu">
+			<li>
+				<a th:href="@{/user/list}" class="display_list">会員一覧表示</a>
+			</li>
+			<li th:if="${session.user.authority == 1}">
+				<a th:href="@{/order/list/admin}" class="display_list">注文一覧表示</a>
+			</li>
+			<li th:if="${session.user.authority == 1}">
+				<a th:href="@{/item/list/admin}" class="display_list">商品一覧表示</a>
+			</li>
+			<li th:if="${session.user.authority == 1}">
+				<a th:href="@{/category/list}" class="display_list">カテゴリ一覧表示</a>
+			</li>
+		</ul>
+	</div>
+</div>
+</body>
+</html>

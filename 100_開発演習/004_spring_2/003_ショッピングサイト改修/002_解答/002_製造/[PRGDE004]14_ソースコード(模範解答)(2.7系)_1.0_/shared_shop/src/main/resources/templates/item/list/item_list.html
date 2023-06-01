@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{common/2021/layout_inner :: layout(
+	title=~{::title/content()},
+	body=~{::body/content()}
+)}">
+<head>
+<meta charset="utf-8">
+<title>商品一覧</title>
+</head>
+<body>
+<div class="user item_list">
+	<h2 class="title">
+		商品一覧
+	</h2>
+	<div class="sorted_by">
+		<span th:if="${sortType == null || sortType == 1}">
+		    <span>新着順</span>
+			<a th:href="@{${URL.ITEM_LIST}}+'/2'">
+				売れ筋順
+			</a>
+		</span>
+		<span th:unless="${sortType == null || sortType == 1}">
+			<a th:href="@{${URL.ITEM_LIST_DEFAULT}}">
+				新着順
+			</a>
+			<span>
+				売れ筋順
+			</span>
+		</span>
+		</div>
+		<div id="item_list" class="row">
+			<div class="sale-item-box col-4" th:each="item: ${items}" th:if="!${#lists.isEmpty(items)}">
+				<th:block th:replace="~{item/common/detail :: content}"></th:block>
+			</div>
+		</div>
+
+		<ul class="paging" th:if="!${#lists.isEmpty(items)}">
+			<li th:class="${pages.first} ? 'disabled':''" >
+				<span th:if="${pages.first}">&lt;&lt;</span>
+				<a th:if="${not pages.first}" th:href="@{${url}(page=0)}">&lt;&lt;</a>
+			</li>
+			<li th:each='i : ${#numbers.sequence(0, pages.totalPages-1)}'
+				th:class="(${i}==${pages.number})? 'active' : ''" >
+				<span th:if='${i}==${pages.number}' th:text='${i+1}'>1</span>
+				<a th:if='${i}!=${pages.number}' th:href="@{${url}(page=${i})}">
+					<span th:text='${i+1}'>1</span>
+				</a>
+			</li>
+			<li th:class="${pages.last} ? 'disabled':''" >
+				<span th:if="${pages.last}">&gt;&gt;</span>
+				<a th:if="${not pages.last}"
+					th:href="@{${url}(page=(${pages.totalPages}-1))}">&gt;&gt;</a>
+			</li>
+		</ul>
+</div>
+</body>
+</html>

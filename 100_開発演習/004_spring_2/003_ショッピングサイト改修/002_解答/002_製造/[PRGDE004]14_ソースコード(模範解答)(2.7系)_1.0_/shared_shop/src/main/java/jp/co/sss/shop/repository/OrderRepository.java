@@ -1,7 +1,5 @@
 package jp.co.sss.shop.repository;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,25 +18,12 @@ import jp.co.sss.shop.util.JPQLConstant;
 
 public interface OrderRepository extends JpaRepository<Order, Integer> {
 
-	/**
-	 * 直近に登録された注文情報の取得
-	 * @return 注文情報エンティティ
-	 */
-	Order findTop1ByOrderByIdDesc();
+	Order findTop1ByOrderByInsertDateDesc();
 
-	/**
-	 * 会員IDに該当する注文情報を注文日付降順で検索
-	 * @param userId 会員ID
-	 * @return 注文エンティティのリスト
-	 */
-	List<Order> findByUserIdOrderByInsertDateDescIdDesc(int userId);
+	// 会員IDに該当する注文情報を注文日付順で検索
+	Page<Order> findByUserIdOrderByInsertDateDesc(int userId, Pageable pageable);
 
-	/**
-	 * 注文日付降順で注文情報すべてを検索
-	 * @param pageable ページング情報
-	 * @return 注文エンティティのページオブジェクト
-	 */
+	// 注文日付順で注文情報すべてを検索
 	@Query(JPQLConstant.FIND_ALL_ORDERS_ORDER_BY_INSERT_DATE)
-	Page<Order> findAllOrderByInsertdateDescIdDesc(Pageable pageable);
-
+	Page<Order> findAllOrderByInsertDateDesc(Pageable pageable);
 }

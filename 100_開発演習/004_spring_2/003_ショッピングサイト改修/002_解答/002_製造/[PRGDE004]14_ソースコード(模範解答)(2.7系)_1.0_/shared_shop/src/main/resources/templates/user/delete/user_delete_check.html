@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{common/2021/layout_inner :: layout(
+	title=~{::title/content()},
+	body=~{::body/content()}
+)}">
+<head>
+<title>会員削除確認</title>
+<meta charset="UTF-8" />
+</head>
+<body class="user user_delete_check">
+<th:block th:object="${userForm}">
+	<h2 class="title">会員削除確認</h2>
+	<p class="alert alert-danger">以下の内容を削除します。</p>
+	<th:block th:replace="~{user/common/detail :: content}"></th:block>
+	<form th:action="@{/user/delete/complete}" method="post" class="d-inline">
+		<input type="hidden" th:field="*{id}" />
+		<button type="submit" class="btn btn-danger btn-lg float-left mr-2">退会</button>
+	</form>
+	<form method="post" th:action="@{/user/detail}" class="d-inline">
+		<input type="hidden" th:field="*{id}">
+		<button type="submit" class="btn btn-secondary btn-lg float-left">戻る</button>
+	</form>
+</th:block>
+</body>
+</html>

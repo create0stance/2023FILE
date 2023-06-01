@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+</head>
+<body>
+<th:block th:fragment="content">
+<div class="sale-item-image-area">
+	<div class="sale-item-image">
+		<th:block th:if="${item.image != null}">
+		<img th:src="@{/img/{image}(image=${item.image})}" alt="" />
+		</th:block>
+		<th:block th:if="${item.image == null}">
+		<img th:src="@{/img/common/no_image.jpg}"></img>
+		</th:block>
+	</div>
+	<button class="good btn-sm"><i class="fas fa-heart"></i></button>
+	<div class="btn-area">
+		<a class="show-detail btn btn-block" th:href="@{/item/detail/{id}(id=${item.id})}">SHOW DETAIL</a>
+		<form method="post" class="mt-2" th:action="@{${URL.BASKET_ADD}}">
+			<input type="hidden" name="id" th:value="${item.id}" />
+			<button type="submit" class="add-cart btn btn-block">
+				<i class="fas fa-shopping-cart"></i>&nbsp;&nbsp;ADD CART
+			</button>
+		</form>
+
+	</div>
+</div>
+<div class="sale-item-description">
+	<p class="category-name"><a th:href="@{/item/list/category/1(categoryId=${item.categoryId})}" th:text="${item.categoryName}"></a>
+	<h3 class="item-name">
+		<a th:href="@{/item/detail/{id}(id=${item.id})}" th:text="${item.name}">タコ焼き</a>
+	</h3>
+	<p class="item-price" th:text="|${item.price}円|"></p>
+</div>
+</th:block>
+</body>
+</html>

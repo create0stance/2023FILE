@@ -21,8 +21,8 @@ import jp.co.sss.shop.validator.CategoryValidator;
  */
 
 @Target({ java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.ANNOTATION_TYPE,
-		java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD,
-		java.lang.annotation.ElementType.PARAMETER })
+        java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD,
+        java.lang.annotation.ElementType.PARAMETER })
 
 /**
  * アノテーション情報の維持範囲
@@ -35,35 +35,14 @@ import jp.co.sss.shop.validator.CategoryValidator;
  */
 @Constraint(validatedBy = { CategoryValidator.class })
 public @interface CategoryCheck {
-
-	/**
-	 * 入力チェックNGの場合のメッセージを設定
-	 * @return 表示メッセージ
-	 */
 	String message() default "{categoryListAdmin.duplicate.message}";
 
-	/**
-	 * 特定のバリデーショングループを設定(設定なし)
-	 * @return バリデーショングループのクラスリスト
-	 */
 	Class<?>[] groups() default {};
 
-	/**
-	 * 検証対象データに対する属性や関連する情報を定義  (処理定義なし)
-	 * @return 対象となるオブジェクトのペイロード
-	 */
 	Class<? extends Payload>[] payload() default {};
 
-	/**
-	 * カテゴリ名の取得
-	 * @return カテゴリ名
-	 */
 	String fieldName() default "name";
 
-	/**
-	 * カテゴリIDの取得
-	 * @return カテゴリID
-	 */
 	String fieldId() default "id";
 
 }

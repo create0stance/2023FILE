@@ -1,29 +1,91 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-    th:replace="~{common/layout_5block :: layout(~{::title},~{::body/content()})}">
+<html lang="ja">
+
 <head>
-<title th:text="#{top}+' | '+ #{shop.title}"> </title>
-<meta charset="UTF-8" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>トップ</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link th:href="@{/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/assets/vendor/icofont/icofont.min.css}" rel="stylesheet">
+    <link th:href="@{/assets/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet">
+    <link th:href="@{/assets/vendor/venobox/venobox.css}" rel="stylesheet">
+    <link th:href="@{/assets/vendor/owl.carousel/assets/owl.carousel.min.css}" rel="stylesheet">
+    <link th:href="@{/assets/vendor/aos/aos.css}" rel="stylesheet">
+    <link th:href="@{/assets/css/style.css}" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/assets/css/loading.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/hero.css}" />
+
 </head>
-<body class="user index">
-	<div>
-		<h2 class="title">
-				<span th:if="${sortType==1}" th:text="#{sort.latest.title}"></span>
-				<span th:if="${sortType==2 || sortType==null}" th:text="#{sort.hotsell.title}"></span>
-		</h2>
+
+<body>
+	<div id="top-wrapper">
+		<div th:replace="~{common/2021/header :: layout-header(transparent=true)}"></div>
+		<div th:replace="~{top/hero :: content}"></div>
+		<main id="main">
+			<div th:replace="~{top/category_form :: content}"></div>
+			<div th:replace="~{top/sale_sort_item :: content}"></div>
+			<div th:replace="~{top/topics :: content}"></div>
+			<div th:replace="~{top/wp_posts :: content}"></div>
+			<div th:replace="~{top/contact :: content}"></div>
+		</main>
+		<div th:replace="~{common/2021/footer :: layout-footer}"></div>
+		<a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 	</div>
-	<div th:if="${#lists.isEmpty(items)}">
-		<p th:text="#{msg.client.item.list.none}"></p>
-	</div>
-	<th:block th:each="item, status: ${items}" th:if="${status.count le 10}">
-		<!--/* 1件分の商品情報 */-->
-		<div class="item">
-			<div class="item_name" th:text="${item.name}"></div>
-			<a th:href="@{/client/item/detail/}+${item.id}">
-			    <img th:src="@{/images/{image}(image=${item.image})}" th:if="${item.image != null}" />
-			    <img th:src="@{/images/common/no_image.jpg}" th:if="${item.image == null}" />
-			</a>
-		</div>
-	</th:block>
+	<div th:replace="~{top/loading :: content}"></div>
+
+	<!-- Vue -->
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hooper@0.2.1/dist/hooper.css">
+	<script src="https://cdn.jsdelivr.net/npm/hooper@0.2.1/dist/hooper.min.js"></script>
+
+	<script th:src="@{/assets/vendor/jquery/jquery.min.js}"></script>
+	<script th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	<script th:src="@{/assets/vendor/jquery.easing/jquery.easing.min.js}"></script>
+	<script th:src="@{/assets/vendor/php-email-form/validate.js}"></script>
+	<script th:src="@{/assets/vendor/waypoints/jquery.waypoints.min.js}"></script>
+	<script th:src="@{/assets/vendor/counterup/counterup.min.js}"></script>
+	<script th:src="@{/assets/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
+	<script th:src="@{/assets/vendor/venobox/venobox.min.js}"></script>
+	<script th:src="@{/assets/vendor/owl.carousel/owl.carousel.min.js}"></script>
+	<script th:src="@{/assets/vendor/aos/aos.js}"></script>
+
+
+
+    <script src="https://kit.fontawesome.com/4a0d995001.js" crossorigin="anonymous"></script>
+	<!-- Vuex -->
+	<script src="https://unpkg.com/vuex"></script>
+	<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.js"></script>
+	<!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<!-- hooper -->
+	<script src="https://cdn.jsdelivr.net/npm/hooper@0.2.1/dist/hooper.min.js"></script>
+
+	<!-- Template Main JS File -->
+	<script th:src="@{/assets/js/vue_const.js}"></script>
+	<script th:src="@{/assets/js/wp_vue.js}"></script>
+	<script th:src="@{/assets/js/top.js}"></script>
+	<script th:src="@{/assets/js/main.js}"></script>
+
+	<style>
+	.hooper {
+		height: 100%;
+		padding:0 0 20px 0;
+		margin-bottom: 10px;
+	}
+	button.hooper-indicator {
+		background-color: #ddd;
+	}
+	.hooper-list{
+		padding-bottom:20px;
+	}
+	.page_n {
+		text-align: center;
+		height: 50px;
+	}
+	</style>
 </body>
+
 </html>

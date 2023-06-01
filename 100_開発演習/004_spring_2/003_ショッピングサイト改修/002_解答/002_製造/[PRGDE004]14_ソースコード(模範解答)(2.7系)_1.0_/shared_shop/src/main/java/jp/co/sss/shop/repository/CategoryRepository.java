@@ -19,39 +19,16 @@ import jp.co.sss.shop.util.JPQLConstant;
  */
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
-
-	/**
-	 * カテゴリ名と削除フラグを条件に検索
-	 * @param name カテゴリ名
-	 * @param deleteFlag 削除フラグ
-	 * @return カテゴリエンティティ
-	 */
 	Category findByNameAndDeleteFlag(String name, int deleteFlag);
 
-	/**
-	 * カテゴリIDと削除フラグを条件に検索
-	 * @param id カテゴリID
-	 * @param deleteFlag 削除フラグ
-	 * @return カテゴリエンティティ
-	 */
 	Category findByIdAndDeleteFlag(Integer id, int deleteFlag);
 
-	/**
-	 * カテゴリ情報を登録日付降順に取得
-	 * @param deleteFlag 削除フラグ
-	 * @return カテゴリエンティティのリスト
-	 */
-	List<Category> findByDeleteFlagOrderByInsertDateDescIdDesc(int deleteFlag);
+	// カテゴリ情報を登録日付順に取得
+	List<Category> findByDeleteFlagOrderByInsertDateDescIdAsc(int deleteFlag);
 
-	
-	/**
-	 * カテゴリ情報を登録日付順に取得(ページング)
-	 * @param deleteFlag 削除フラグ
-	 * @param pageable ページング情報
-	 * @return カテゴリエンティティのページオブジェクト
-	 */
+	// カテゴリ情報を登録日付順に取得
 	@Query(JPQLConstant.FIND_ALL_CATEGORIES_ORDER_BY_INSERT_DATE)
-	Page<Category> findByDeleteFlagOrderByInsertDateDescIdDescPage(
-			@Param(value = "deleteFlag") int deleteFlag, Pageable pageable);
+	Page<Category> findByDeleteFlagOrderByInsertDateDescPage(
+	        @Param(value = "deleteFlag") int deleteFlag, Pageable pageable);
 
 }

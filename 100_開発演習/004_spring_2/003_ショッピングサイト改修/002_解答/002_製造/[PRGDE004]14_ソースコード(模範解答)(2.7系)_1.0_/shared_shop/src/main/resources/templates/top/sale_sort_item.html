@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+</head>
+<body>
+<th:block th:fragment="content">
+<section id="services" class="services">
+	<div class="container">
+		<div class="section-title" data-aos="fade-in" data-aos-delay="100">
+			<h2>売れ筋商品</h2>
+			<p></p>
+		</div>
+		<div id="sale-items" class="owl-carousel">
+			<div class="sale-item-box" th:each="item: ${items}" th:if="!${#lists.isEmpty(items)}">
+				<th:block th:replace="~{item/common/detail :: content}"></th:block>
+			</div>
+		</div>
+	</div>
+</section>
+</th:block>
+</body>
+</html>

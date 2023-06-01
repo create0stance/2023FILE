@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{common/2021/layout_inner :: layout(
+	title=~{::title/content()},
+	body=~{::body/content()}
+)}">
+<head>
+<title>会員登録完了</title>
+<meta charset="UTF-8" />
+</head>
+<body class="user index">
+	<h2 class="title">会員登録完了</h2>
+	<p class="alert alert-info">会員の登録が完了しました。</p>
+	<div class="text-right">
+	<a class="btn btn-secondary" th:href="@{/}">トップへ戻る</a>
+	</div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+</head>
+<body>
+<th:block th:fragment="content">
+<section id="blogs" class="team">
+	<div class="container">
+		<div class="section-title" data-aos="fade-in" data-aos-delay="100">
+			<h2>Blog</h2>
+			<p>Sesokoの魅力、伝えます！！</p>
+		</div>
+
+		<hooper v-if="posts && posts.length" :settings="hooperSettings">
+			<slide class="post" v-for="(post,index) in posts" :key="index">
+				<div class="member" data-aos="fade-up">
+					<div class="pic">
+						<a :href="blog_detail_path + '?id=' + post.id">
+						<img :src="post._embedded['wp:featuredmedia'][0].source_url" class="img-fluid" alt="">
+						</a>
+					</div>
+					<div class="member-info">
+						<h4><a :href="blog_detail_path + '?id=' + post.id">{{ post.title.rendered }}</a></h4>
+						<span>
+							<time class="date" :datetime="post.date">公開日：{{ dateFormat(post.date) }}</time>
+							<time class="modified" :datetime="post.modified">更新日：{{ dateFormat(post.modified) }}</time>
+						</span>
+						<div class="social">
+							<a :href="'https://twitter.com/intent/tweet?url=' + app_url + blog_detail_path + '?id=' + post.id"><i class="icofont-twitter"></i></a>
+							<a :href="'https://www.facebook.com/sharer/sharer.php?u=' + app_url + blog_detail_path + '?id=' + post.id" target="_blank" rel="nofollow noopener noreferrer"><i class="icofont-facebook"></i></a>
+							<a :href="'https://social-plugins.line.me/lineit/share?url=' + app_url + blog_detail_path + '?id=' + post.id" target="_blank" rel="nofollow noopener noreferrer"><i class="icofont-line"></i></a>
+						</div>
+					</div>
+				</div>
+			</slide>
+			<hooper-pagination slot="hooper-addons"></hooper-pagination>
+		</hooper>
+	</div>
+</section>
+</th:block>
+</body>
+</html>

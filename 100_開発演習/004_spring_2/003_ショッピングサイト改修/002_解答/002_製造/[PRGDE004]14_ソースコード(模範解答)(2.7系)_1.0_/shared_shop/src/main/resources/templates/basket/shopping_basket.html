@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{common/layout_5block :: layout(~{::body/content()})}">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+<div  class="user shopping_basket">
+	<h2 class="title">買い物かご</h2>
+	<table class="list_table basket">
+		<tr>
+			<th>商品名</th>
+			<th>数</th>
+			<th>操作</th>
+			<th>在庫</th>
+		</tr>
+		<tr th:each="basket:${session.basketList}">
+			<td><a th:href="@{${URL.ITEM_DETAIL}}+ '/' + ${basket.id}" th:text="${basket.name}"></a></td>
+			<td th:text="${basket.orderNum}"></td>
+			<td>
+				<form th:action="@{${URL.BASKET_DELETE}}" method="post">
+					<input type="hidden" name="id" th:value="${basket.id}" />
+					<input type="submit" value="削除" class="delete" />
+				</form>
+			</td>
+			<td th:text="${basket.stock}"></td>
+		</tr>
+	</table>
+
+	<div class="user_info_form_area">
+		<form th:action="@{${URL.ADDRESS_INPUT}}" method="post">
+			<input type="submit" value="ご注文のお手続き" />
+		</form>
+		<form th:action="@{${URL.BASKET_ALL_DELETE}}" method="post">
+			<input type="submit" value="買い物かごを空にする" class="delete" />
+		</form>
+	</div>
+</div>
+</body>
+</html>

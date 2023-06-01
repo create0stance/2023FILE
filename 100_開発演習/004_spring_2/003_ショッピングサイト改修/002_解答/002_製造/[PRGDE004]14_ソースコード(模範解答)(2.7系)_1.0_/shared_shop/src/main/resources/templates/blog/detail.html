@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{common/2021/layout_inner :: layout(
+	title=~{::title/content()},
+	body=~{::#blog_detail},
+	script=~{::#script}
+)}">
+<head>
+<title>ブログ記事詳細</title>
+<meta charset="UTF-8" />
+</head>
+<body class="user index">
+<div id="blog_detail">
+<div v-if="post.id > 0">
+		<h3>{{ post.title.rendered }}</h3>
+		<span>
+			<time class="date" :datetime="post.date">公開日：{{ dateFormat(post.date) }}</time>
+			<time class="modified" :datetime="post.modified">更新日：{{ dateFormat(post.modified) }}</time>
+		</span>
+		<div v-html = "post.content.rendered"></div>
+</div>
+</div>
+<div id="script">
+<script th:src="@{/assets/js/wp_detail.js}"></script>
+</div>
+</body>
+</html>

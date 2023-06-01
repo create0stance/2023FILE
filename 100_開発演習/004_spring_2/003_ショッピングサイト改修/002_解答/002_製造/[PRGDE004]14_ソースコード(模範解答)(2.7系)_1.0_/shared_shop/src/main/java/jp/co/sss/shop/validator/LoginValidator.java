@@ -20,14 +20,14 @@ import jp.co.sss.shop.util.Constant;
  * @author System Shared
  */
 public class LoginValidator implements ConstraintValidator<LoginCheck, Object> {
-	private String email;
-	private String password;
+	private String	email;
+	private String	password;
 
 	@Autowired
-	UserRepository userRepository;
+	UserRepository	userRepository;
 
 	@Autowired
-	HttpSession session;
+	HttpSession		session;
 
 	@Override
 	public void initialize(LoginCheck annotation) {
@@ -38,13 +38,13 @@ public class LoginValidator implements ConstraintValidator<LoginCheck, Object> {
 	@Override
 	public boolean isValid(Object value, ConstraintValidatorContext context) {
 		BeanWrapper beanWrapper = new BeanWrapperImpl(value);
-		boolean isValidFlg = false;
-		String emailProp = (String) beanWrapper.getPropertyValue(this.email);
-		String passwordProp = (String) beanWrapper.getPropertyValue(this.password);
 
-		User user = userRepository.findByEmailAndDeleteFlag(emailProp, Constant.NOT_DELETED);
+		String email = (String) beanWrapper.getPropertyValue(this.email);
+		String password = (String) beanWrapper.getPropertyValue(this.password);
 
-		if (user != null && passwordProp.equals(user.getPassword())) {
+		User user = userRepository.findByEmailAndDeleteFlag(email, Constant.NOT_DELETED);
+
+		if (user != null && password.equals(user.getPassword())) {
 			UserBean userBean = new UserBean();
 
 			userBean.setId(user.getId());
@@ -53,11 +53,10 @@ public class LoginValidator implements ConstraintValidator<LoginCheck, Object> {
 
 			// セッションスコープにログインしたユーザの情報を登録
 			session.setAttribute("user", userBean);
-			isValidFlg = true;
-		} else {
-			//ユーザ認証に失敗
-			isValidFlg = false;
+			return true;
 		}
-		return isValidFlg;
+		else {
+			return false;
+		}
 	}
 }

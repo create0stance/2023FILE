@@ -1,4 +1,4 @@
-﻿@charset "UTF-8";
+﻿@CHARSET "UTF-8";
 
 /* ---- 共通 ---- */
 
@@ -129,9 +129,9 @@ header {
 
 
 /* ---- タイトル共通 ---- */
-.search_area .title,
-.main .title
- {
+.search .title,
+.main .title,
+.admin_menu_area .title {
 	background-color: #3d98bf;
 	margin: 0;
 	padding: 5px 8px;
@@ -183,29 +183,19 @@ aside.admin_menu {
 	float: left;
 	width: 20%;
 }
-
 .search .title,
 .admin_menu .title {
 	border-radius: 6px 6px 0 0;
 	text-align: center;
 	font-size: 1.1em;
 }
-.search_area .title{
-	border-radius: 6px 6px 6px 6px;
-	text-align: center;
-	font-size: 1.1em;
-}
-
 .admin_menu .title {
-	background: #ff6c49;
-	padding: 5px;
-}
-.admin_menu_list .title {
 	background: #ff6c49;
 }
 .search .form {
 	padding: 15px 0 50px 5px;
 }
+.search .price,
 .admin_menu .display_list {
 	display: block;
 	padding: 10px;
@@ -216,18 +206,26 @@ aside.admin_menu {
 	text-decoration: none;
 	transition: background-color 0.18s;
 }
-
-.admin_menu .display_list:link,
-.admin_menu .display_list:visited,
-.admin_menu .display_list:hover,
-.admin_menu .display_list:active {
+.search .price:link,
+.search .price:visited,
+.search .price:hover,
+.search .price:active,
+.admin_menu_area .display_list:link,
+.admin_menu_area .display_list:visited,
+.admin_menu_area .display_list:hover,
+.admin_menu_area .display_list:active {
 	color: #2a2a2a;
 }
-
-.admin_menu .display_list:hover {
-	background: #ffc6b9;
+.search .price:hover {
+	background: #5fb4d9;
+	color: #fff;
 }
-.admin_menu li:last-of-type .display_list {
+.admin_menu_area .display_list:hover {
+	background: #ff8669;
+	color: #fff;
+}
+.search li:last-of-type .price,
+.admin_menu_area li:last-of-type .display_list {
 	border-radius: 0 0 6px 6px;
 }
 
@@ -281,14 +279,6 @@ aside.admin_menu {
 	text-shadow: 1px 1px 1px #333;
 	padding: 5px 0;
 }
-.admin_menu_list .title_area_no_shadow {
-	background: #ff6c49;
-	text-align: center;
-	border: 1px solid #ff6c49;
-	border-radius: 6px 6px 0 0;
-	font-size: 1.2em;
-	padding: 5px 0;
-}
 .admin_menu_list .link_area {
 	margin: 0;
 }
@@ -310,16 +300,10 @@ aside.admin_menu {
 }
 
 .error_mess_maintenance,
-.input_message,
 .complete_message,
 .check_message {
 	padding-top: 20px;
 	font-size: 1.2em;
-}
-.check_error_message {
-	padding-top: 20px;
-	font-size: 1.2em;
-	color:#C00;
 }
 .complete_message,
 .complete_link {

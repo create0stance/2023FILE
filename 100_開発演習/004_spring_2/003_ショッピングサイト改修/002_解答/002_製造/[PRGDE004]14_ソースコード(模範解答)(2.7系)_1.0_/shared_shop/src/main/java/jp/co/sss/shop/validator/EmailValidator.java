@@ -18,14 +18,14 @@ import jp.co.sss.shop.repository.UserRepository;
  * @author System Shared
  */
 public class EmailValidator implements ConstraintValidator<EmailCheck, Object> {
-	private String email;
-	private String id;
+	private String	email;
+	private String	id;
 
 	@Autowired
-	UserRepository userRepository;
+	UserRepository	userRepository;
 
 	@Autowired
-	HttpSession session;
+	HttpSession		session;
 
 	@Override
 	public void initialize(EmailCheck annotation) {
@@ -36,20 +36,21 @@ public class EmailValidator implements ConstraintValidator<EmailCheck, Object> {
 	@Override
 	public boolean isValid(Object value, ConstraintValidatorContext context) {
 		BeanWrapper beanWrapper = new BeanWrapperImpl(value);
-		boolean isValidFlg = false;
 
-		String emailProp = (String) beanWrapper.getPropertyValue(this.email);
-		Integer idProp = (Integer) beanWrapper.getPropertyValue(this.id);
-		User user = userRepository.findByEmail(emailProp);
+		String email = (String) beanWrapper.getPropertyValue(this.email);
+		Integer id = (Integer) beanWrapper.getPropertyValue(this.id);
+		User user = userRepository.findByEmail(email);
 
-		if (user == null || user.getId() == idProp) {
-			//会員が存在していないもしくは、メールアドレス利用者と会員IDが一致の場合 有効
-			isValidFlg = true;
-		} else {
-			//会員が存在している、
-			isValidFlg = false;
+		if (user == null || user.getId() == id) {
+			return true;
 		}
-		return isValidFlg;
+		else {
+			return false;
+		}
 	}
 
+	
+	
+	
+	
 }

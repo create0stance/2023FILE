@@ -3,20 +3,22 @@ package jp.co.sss.shop.filter;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpFilter;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import jp.co.sss.shop.bean.CategoryBean;
 import jp.co.sss.shop.entity.Category;
 import jp.co.sss.shop.repository.CategoryRepository;
-import jp.co.sss.shop.service.BeanTools;
+import jp.co.sss.shop.util.BeanCopy;
 import jp.co.sss.shop.util.Constant;
 import jp.co.sss.shop.util.URLCheck;
 
@@ -25,20 +27,12 @@ import jp.co.sss.shop.util.URLCheck;
  *
  * @author System Shared
  */
+@Component
+public class CategoryListMakeFilter implements Filter {
 
-public class CategoryListMakeFilter extends HttpFilter {
-
-	/**
-	 * カテゴリリポジトリ
-	 */
 	@Autowired
 	CategoryRepository categoryRepository;
 
-	/**
-	 * Entity、Form、Bean間のデータコピーサービス
-	 */
-	@Autowired
-	BeanTools beanTools;
 	/**
 	 * フィルタの初期化時にこのフィルタ内のAutowiredを実行する
 	 *
@@ -51,25 +45,62 @@ public class CategoryListMakeFilter extends HttpFilter {
 	}
 
 	@Override
-	public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 
-		// リクエストURLを取得
-		String requestURL = request.getRequestURI();
-		if (URLCheck.isURLForMakeCategoryList(requestURL)) {
+		// リクエスト情報を取得
+		HttpServletRequest httpRequest = (HttpServletRequest) request;
+
+		if (checkRequestURL(httpRequest)) {
 
 			// カテゴリ情報を全件検索
 			List<Category> categoryList = categoryRepository
-					.findByDeleteFlagOrderByInsertDateDescIdDesc(Constant.NOT_DELETED);
+					.findByDeleteFlagOrderByInsertDateDescIdAsc(Constant.NOT_DELETED);
 
 			// エンティティ内の検索結果をJavaBeansにコピー
-			List<CategoryBean> categoryBeanList = beanTools.copyEntityListToCategoryBeanList(categoryList);
+			List<CategoryBean> categoryBeanList = BeanCopy.copyEntityToCategoryBean(categoryList);
 
 			//リクエストスコープに検索結果を保存
-			request.setAttribute("categories", categoryBeanList);
+			httpRequest.setAttribute("categories", categoryBeanList);
 		}
 		chain.doFilter(request, response);
 	}
 
+	/**
+	 * リクエストURLがチェック対象であるかを判定
+	 *
+	 * @param requestURL リクエストURL
+	 * @return true：チェック対象、false：チェック対象外
+	 */
+	private boolean checkRequestURL(HttpServletRequest httpRequest) {
+		// リクエストURLを取得
+		String requestURL = httpRequest.getRequestURI();
 
+		if ((!URLCheck.checkURLForStaticFile(requestURL)
+				&& requestURL.indexOf("/admin") == -1)
+				&& (requestURL.endsWith("/")
+						|| requestURL.indexOf("/item/list") != -1
+						|| requestURL.indexOf("/item/detail") != -1
+						|| requestURL.indexOf("/item/regist/input") != -1
+						|| requestURL.indexOf("/item/update/input") != -1
+						|| requestURL.indexOf("/basket") != -1
+						|| requestURL.indexOf("/address") != -1
+						|| requestURL.indexOf("/payment/input") != -1
+						|| requestURL.indexOf("/order/list") != -1
+						|| requestURL.indexOf("/order/check") != -1
+						|| requestURL.indexOf("/order/detail") != -1
+						|| requestURL.indexOf("/order/complete") != -1
+						|| requestURL.indexOf("/user/detail") != -1
+						|| requestURL.indexOf("/user/regist") != -1
+						|| requestURL.indexOf("/user/update") != -1
+						|| requestURL.indexOf("/user/delete") != -1)) {
+
+			// URLのリクエスト先がフィルタ実行対象である場合
+			return true;
+
+		} else {
+			// URLのリクエスト先がフィルタ実行対象ではない場合
+			return false;
+		}
+	}
 }

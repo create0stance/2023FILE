@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+</head>
+<body>
+<th:block th:fragment="layout-header">
+<header id="header" class="fixed-top" th:classappend="${transparent} ? header-transparent">
+	<div class="container d-flex align-items-center">
+		<div class="logo mr-auto">
+        	<h1 class="text-light"><a th:href="@{/}"><span>シェアードショップ</span></a></h1>
+			<!-- <a th:href="@{index.html"><img th:src="@{/assets/img/logo.png" alt="" class="img-fluid"></a>-->
+	    </div>
+		<nav class="nav-menu d-none d-lg-block">
+        	<ul>
+				<th:block th:if="${session.user == null or session.user.authority == 2}">
+				<li class="active"><a th:href="@{/}">トップ</a></li>
+				<li><a th:href="@{/item/list/1}">新着一覧</a></li>
+				<li><a th:href="@{/basket/list}"><i class="fas fa-shopping-cart"></i>&nbsp;買い物かご</a></li>
+				<li><a th:href="@{${URL.ORDER_LIST}}"><i class="fas fa-list-ol"></i>&nbsp;注文一覧</a></li>
+				</th:block>
+				<th:block th:if="${session.user != null and session.user.authority == 2}">
+				<li><a th:href="@{/user/detail}"><th:block th:text="${session.user.name}"></th:block>さん、ようこそ</a></li>
+				</th:block>
+				<th:block th:if="${session.user != null and (session.user.authority == 0 or session.user.authority == 1)}">
+				<li><a th:href="@{/user/detail/admin/{id}(id=${session.user.id})}"><th:block th:text="${session.user.name}"></th:block>さん、ようこそ</a></li>
+				</th:block>
+				<th:block th:if="${session.user != null}">
+				<li><a th:href="@{/logout}">ログアウト</a></li>
+				</th:block>
+				<th:block th:if="${session.user == null}">
+				<li><a th:href="@{/login}">ログイン</a> </li>
+				<li><a th:href="@{/user/regist/input}">新規会員登録</a></li>
+				</th:block>
+			</ul>
+		</nav>
+	</div>
+</header>
+</th:block>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{common/2021/layout_inner :: layout(
+	title=~{::title/content()},
+	body=~{::body/content()}
+)}">
+<head>
+<title>会員変更完了</title>
+<meta charset="UTF-8" />
+</head>
+<body class="user index">
+	<h2 class="title">会員変更完了</h2>
+	<p class="alert alert-info">会員情報の変更が完了しました。</p>
+	<div class="text-right">
+		<a class="btn btn-secondary" th:href="@{${URL.USER_DETAIL_URL_INDEX}}">会員詳細へ戻る</a>
+	</div>
+
+</body>
+</html>

@@ -24,24 +24,24 @@ public class CategoryValidator implements ConstraintValidator<CategoryCheck, Obj
 	/**
 	 * カテゴリ名
 	 */
-	private String name;
+	private String		name;
 
 	/**
 	 * カテゴリID
 	 */
-	private String id;
+	private String		id;
 
 	/**
 	 * カテゴリ情報レポジトリ
 	 */
 	@Autowired
-	CategoryRepository categoryRepository;
+	CategoryRepository	categoryRepository;
 
 	/**
 	 * セッション情報
 	 */
 	@Autowired
-	HttpSession session;
+	HttpSession			session;
 
 	/**
 	 * 初期化処理
@@ -68,23 +68,23 @@ public class CategoryValidator implements ConstraintValidator<CategoryCheck, Obj
 	@Override
 	public boolean isValid(Object value, ConstraintValidatorContext context) {
 		BeanWrapper beanWrapper = new BeanWrapperImpl(value);
-		boolean isValidFlg = false;
-		String nameProp = (String) beanWrapper.getPropertyValue(this.name);
-		Integer idProp = (Integer) beanWrapper.getPropertyValue(this.id);
-		Category category_same_name = categoryRepository.findByNameAndDeleteFlag(nameProp, Constant.NOT_DELETED);
 
-		if (category_same_name == null) {
-			// 同じカテゴリ名の情報が存在していない場合は、有効
-			isValidFlg=true;
-		}else if (idProp == category_same_name.getId()) {
-			// 同じカテゴリ名のカテゴリIDが変更対象のIDと一致する場合は、有効
-			isValidFlg=true;
-		}else {
-			// 名前重複エラー
-			isValidFlg=false;
+		String name = (String) beanWrapper.getPropertyValue(this.name);
+		Integer id = (Integer) beanWrapper.getPropertyValue(this.id);
+		Category category_same_name = categoryRepository.findByNameAndDeleteFlag(name, Constant.NOT_DELETED);
+		Category category_same_id = categoryRepository.findByIdAndDeleteFlag(id, Constant.NOT_DELETED);
 
+		if (category_same_id != null) {
+			// 同じカテゴリIDの情報が存在している場合(変更処理)
+			return true;
 		}
-		return isValidFlg;
-
+		else if (category_same_name == null) {
+			// 同じカテゴリID、同じカテゴリ名の情報が存在していない場合(新規登録)
+			return true;
+		}
+		else {
+			// 同じカテゴリ名が存在していて、同じカテゴリIDの情報が存在していない場合(新規登録時の名前重複)
+			return false;
+		}
 	}
 }

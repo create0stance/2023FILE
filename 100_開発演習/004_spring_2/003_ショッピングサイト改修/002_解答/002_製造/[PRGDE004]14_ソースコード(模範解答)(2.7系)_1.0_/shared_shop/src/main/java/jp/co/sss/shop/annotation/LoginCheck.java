@@ -32,33 +32,13 @@ import jp.co.sss.shop.validator.LoginValidator;
  */
 @Constraint(validatedBy = { LoginValidator.class })
 public @interface LoginCheck {
-	/**
-	 * 入力チェックNGの場合のメッセージを設定
-	 * @return 表示メッセージ
-	 */
 	String message() default "{login.missing.message}";
 
-	/**
-	 * 特定のバリデーショングループを設定(設定なし)
-	 * @return バリデーショングループのクラスリスト
-	 */
 	Class<?>[] groups() default {};
 
-	/**
-	 * 検証対象データに対する属性や関連する情報を定義  (処理定義なし)
-	 * @return 対象となるオブジェクトのペイロード
-	 */
 	Class<? extends Payload>[] payload() default {};
 
-	/**
-	 * メールアドレスの取得
-	 * @return メールアドレス
-	 */
 	String fieldEmail() default "email";
 
-	/**
-	 * パスワードの取得
-	 * @return パスワード
-	 */
 	String fieldPassword() default "password";
 }
